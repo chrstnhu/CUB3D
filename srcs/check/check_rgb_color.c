@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:09:11 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 11:31:07 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/14 13:09:49 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,26 +86,25 @@ int	check_color(char *line)
 	int		i;
 
 	i = 0;
-	if (check_comma(line) == -1)
-		return (-1);
-	// Split the color line into RGB components
 	rgb_parts = split_color(line);
 	if (!rgb_parts)
 		return (-1);
-	// Check each part of the RGB color
 	while (i < 3)
 	{
-		// Check if the part exists and if it's within the valid range (0-255)
 		if (!rgb_parts[i] || (ft_atoi(rgb_parts[i]) < 0
 				|| ft_atoi(rgb_parts[i]) > 255))
-			return (free_tab(rgb_parts, 1));
+		{
+			free_tab(rgb_parts);
+			return (-1);
+		}
 		i++;
 	}
-	// Ensure there are no extra parts beyond the expected three
 	if (rgb_parts[i] != NULL && *rgb_parts[i] != '\0')
-		return (free_tab(rgb_parts, 1));
-	// Free the RGB parts array
-	free_tab(rgb_parts, 0);
+	{
+		free_tab(rgb_parts);
+		return (-1);
+	}
+	free_tab(rgb_parts);
 	return (0);
 }
 
@@ -118,6 +117,8 @@ int	check_digit(char *line)
 	{
 		// If the character is not a digit, comma, or space, return an error
 		if (!(ft_isdigit(line[i]) || line[i] == ',' || ft_isspace(line[i])))
+			return (-1);
+		else if (check_comma(line) == -1)
 			return (-1);
 		i++;
 	}

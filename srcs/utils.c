@@ -6,28 +6,33 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 11:29:16 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/14 19:58:30 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	free_tab(char **tab, int error)
+void	free_tab(char **tab)
 {
 	int	i;
 
 	i = 0;
 	if (tab == NULL)
-		return (-1);
+		return ;
 	while (tab[i] != NULL)
 	{
 		free(tab[i]);
 		i++;
 	}
 	free(tab);
-	if (error == 1)
-		return (-1);
-	return (0);
+}
+
+int	error_msg(char *str, int error) // add without exit
+{
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n" DEF, 2);
+	return (error);
 }
 
 int	error_exit(char *s)

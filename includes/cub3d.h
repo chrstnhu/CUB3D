@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 11:22:48 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/14 19:29:10 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,24 +132,31 @@ typedef struct s_data
 	t_img		playermap;
 }	t_data;
 
-// Check valid map
+// Check valid
 int		file_valid(char *file);
 int		path_valid(char *path);
 int 	check_digit(char *line);
 int		check_color(char *line);
 int		check_texture(char *line);
-int		check_map(char *path);
+int		check_cub_file(char *path);
+int 	check_map(t_data *data);
 char	**split_color(char *line);
+
 
 // Utils
 void	jump_space(char *line);
 int		error_exit(char *s);
-int		free_tab(char **tab, int error);
+int		error_msg(char *str, int error);
+void	free_tab(char **tab);
 
-// Parse texture
-int	parse_texture(t_texinfo *texinfo, char *line);
-int	parse_color(t_texinfo *texinfo, int *color, char *line);
-int	parse_line(t_data *data, char *line);
+// Parsing
+int 	count_map_lines(t_data *data, char **map, int i);
+int		fill_map_tab(t_wholemap *wholemap, char **map_tab, int start);
+int 	parse_map(t_data *data, char **map);
+int		parse_texture(t_texinfo *texinfo, char *line);
+int		parse_color(t_texinfo *texinfo, int *color, char *line);
+int		parse_line(t_data *data, char *line);
+int		parse_cub_file(t_data *data, char *path);
 
 // Init
 

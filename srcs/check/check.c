@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 11:32:18 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/14 13:48:01 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ int	path_valid(char *path)
 
 int	check_texture(char *line)
 {
-	printf("Enter check_texture\n");
 	jump_space(line);
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 	{
-		printf("Line : %s\n", line);
 		line += 2;// Move the pointer past the identifier ("NO", "SO", etc.)
 		jump_space(line);// Jump over any spaces after the identifier
 		if (path_valid(line) == -1)
@@ -50,7 +48,6 @@ int	check_texture(char *line)
 	}
 	else if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 	{
-		printf("Line : %s\n", line);
 		line += 2;
 		jump_space(line);// Move the pointer past the identifier ("F", "C")
 		if ((check_digit(line) == -1))

@@ -8,9 +8,11 @@ OBJ_DIR	= obj
 OBJ_BONUS_DIR	= obj_bonus
 
 # Source
-CHECK = check_rgb_color.c check.c
+CHECK = check_rgb_color.c check.c check_map.c
+PARSING = parse_cub_file.c parse_map.c parse_tex.c parse_utils.c
 
-SRCS = $(CHECK:%=srcs/check/%) srcs/utils.c srcs/init.c srcs/parse_tex.c
+SRCS = $(CHECK:%=srcs/check/%)  $(PARSING:%=srcs/parsing/%) \
+	srcs/utils.c srcs/init.c
 	
 SRCS_BONUS = 
 
@@ -41,13 +43,13 @@ all: $(NAME)
 bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJS)
-	make -C $(LIBFT_PATH)
-	make -C $(MLX_PATH)
+#	make -C $(LIBFT_PATH)
+#	make -C $(MLX_PATH)
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS_PATH)/main.c  $(OBJS) $(LIBS_PATH) $(LFLAGS)
 	
 $(NAME_BONUS): $(OBJS_BONUS)
-	make -C $(LIBFT_PATH)
-	make -C $(MLX_PATH)
+#	make -C $(LIBFT_PATH)
+#	make -C $(MLX_PATH)
 	$(CC) $(CFLAGS) -o $(NAME_BONUS) $(SRCS_BONUS_PATH)/main_bonus.c  $(OBJS_BONUS) $(LIBS_PATH) $(LFLAGS)
 
 $(OBJ_DIR):
@@ -57,14 +59,14 @@ $(OBJ_BONUS_DIR):
 	mkdir -p $(OBJ_BONUS_DIR)
 
 clean:
-	make -C $(LIBFT_PATH) clean
-	make -C $(MLX_PATH) clean
+#	make -C $(LIBFT_PATH) clean
+#	make -C $(MLX_PATH) clean
 	rm -rf $(OBJ_DIR) $(OBJS_BONUS_DIR)
 	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	make -C $(LIBFT_PATH) fclean
-	rm -f libmlx.a
+#	make -C $(LIBFT_PATH) fclean
+#	rm -f libmlx.a
 	rm -f $(NAME) $(NAME_BONUS)
 
 re: fclean all
