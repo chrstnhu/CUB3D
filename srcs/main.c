@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/15 14:33:04 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 16:00:31 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 		error_exit(RED"Invalid file, please end with .cub"DEF);
 	check_cub_file(av[1]);
 	init_data(&data);
-	//ADD
 	parse_cub_file(&data, av[1]);
 	check_map(&data);
 	// if (check_map(data) == -1)
