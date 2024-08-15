@@ -8,10 +8,11 @@ OBJ_DIR	= obj
 OBJ_BONUS_DIR	= obj_bonus
 
 # Source
-CHECK = check_rgb_color.c check.c check_map.c
+CHECK = check_rgb_color.c check_cub_file.c check_map.c check_border_map.c
 PARSING = parse_cub_file.c parse_map.c parse_tex.c parse_utils.c
+PLAYER = init_player_dir.c
 
-SRCS = $(CHECK:%=srcs/check/%)  $(PARSING:%=srcs/parsing/%) \
+SRCS = $(CHECK:%=srcs/check/%)  $(PARSING:%=srcs/parsing/%) $(PLAYER:%=srcs/player/%) \
 	srcs/utils.c srcs/init.c
 	
 SRCS_BONUS = 

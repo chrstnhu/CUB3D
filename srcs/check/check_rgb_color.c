@@ -6,56 +6,33 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:09:11 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 13:09:49 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:56:15 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// Clean space of the color
-static char	*clean_spaces(const char *line)
+static int	check_comma(char *line);
+int			check_color(char *line);
+char		**split_color(char *line);
+static char	*clean_spaces(const char *line);
+
+// Check digit
+int	check_digit(char *line)
 {
-	size_t	len;
-	size_t	i;
-	size_t	j;
-	char	*new_line;
+	int	i;
 
 	i = 0;
-	j = 0;
-	len = ft_strlen(line);
-	new_line = malloc(len + 1);
-	if (!new_line)
-		return (NULL);
-	while (i < len && ft_isspace(line[i])) // Ignore first spaces
-		i++;
-	while (i < len)
+	while (line[i])
 	{
-		// If is not a space, copy the charactere
-		if (!ft_isspace(line[i]))
-			new_line[j++] = line[i];
+		// If the character is not a digit, comma, or space, return an error
+		if (!(ft_isdigit(line[i]) || line[i] == ',' || ft_isspace(line[i])))
+			return (-1);
+		else if (check_comma(line) == -1)
+			return (-1);
 		i++;
 	}
-	// Remove ending spaces
-	if (j > 0 && ft_isspace((new_line[j - 1])))
-		j--;
-	new_line[j] = '\0';
-	return (new_line);
-}
-
-// Split the color string into RGB parts
-char	**split_color(char *line)
-{
-	char	*new_line;
-	char	**rgb_parts;
-
-	// Remove spaces from the line
-	new_line = clean_spaces(line);
-	if (!new_line)
-		return (NULL);
-	// Split the cleaned line by commas
-	rgb_parts = ft_split(new_line, ',');
-	free(new_line);
-	return (rgb_parts);
+	return (0);
 }
 
 // Check comma : (',,') or (',' != 2)
@@ -108,19 +85,48 @@ int	check_color(char *line)
 	return (0);
 }
 
-int	check_digit(char *line)
+// Split the color string into RGB parts
+char	**split_color(char *line)
 {
-	int	i;
+	char	*new_line;
+	char	**rgb_parts;
+
+	// Remove spaces from the line
+	new_line = clean_spaces(line);
+	if (!new_line)
+		return (NULL);
+	// Split the cleaned line by commas
+	rgb_parts = ft_split(new_line, ',');
+	free(new_line);
+	return (rgb_parts);
+}
+
+// Clean space of the color
+static char	*clean_spaces(const char *line)
+{
+	size_t	len;
+	size_t	i;
+	size_t	j;
+	char	*new_line;
 
 	i = 0;
-	while (line[i])
+	j = 0;
+	len = ft_strlen(line);
+	new_line = malloc(len + 1);
+	if (!new_line)
+		return (NULL);
+	while (i < len && ft_isspace(line[i])) // Ignore first spaces
+		i++;
+	while (i < len)
 	{
-		// If the character is not a digit, comma, or space, return an error
-		if (!(ft_isdigit(line[i]) || line[i] == ',' || ft_isspace(line[i])))
-			return (-1);
-		else if (check_comma(line) == -1)
-			return (-1);
+		// If is not a space, copy the charactere
+		if (!ft_isspace(line[i]))
+			new_line[j++] = line[i];
 		i++;
 	}
-	return (0);
+	// Remove ending spaces
+	if (j > 0 && ft_isspace((new_line[j - 1])))
+		j--;
+	new_line[j] = '\0';
+	return (new_line);
 }

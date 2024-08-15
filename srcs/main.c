@@ -6,35 +6,13 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 19:58:45 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 14:33:04 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	check_cub_file(char *path)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (error_exit(RED"Error\nInvalid file"DEF));
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line[0] == '\n')
-			free(line);
-		else
-		{
-			if (check_texture(line) == -1)
-				return (error_exit(RED"Error\nInvalid texture"DEF));
-			free(line);
-		}
-		line = get_next_line(fd);
-	}
-	return (0);
-}
+static int	file_valid(char *file);
 
 int	main(int ac, char **av)
 {
@@ -51,5 +29,15 @@ int	main(int ac, char **av)
 	check_map(&data);
 	// if (check_map(data) == -1)
 		// free_data(data);
+	return (0);
+}
+
+static int	file_valid(char *file)
+{
+	int	len;
+
+	len = ft_strlen(file);
+	if (ft_strncmp(&file[len - 4], ".cub", 4))
+		return (-1);
 	return (0);
 }

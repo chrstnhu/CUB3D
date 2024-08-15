@@ -6,48 +6,14 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:37:43 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 19:29:50 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 15:54:37 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int count_map_lines(t_data *data, char **map, int i)
-{
-	int count;
-	int j;
-
-	count = 0;
-	while (map[i])
-	{
-		j = 0;
-		while(ft_isspace(map[i][j]))
-			j++;
-		if (map[i][j] != '1')
-			break ;
-		i++;
-		count++;
-	}
-	data->wholemap.index_end_of_map = i;
-	return (count);
-}
-
-static int	get_longest_line(t_wholemap *map, int i)
-{
-	int	longest_line;
-	int current_line;
-
-	current_line = ft_strlen(map->file[i]);
-	longest_line = ft_strlen(map->file[i]);
-	while (map->file[i])
-	{
-		current_line = ft_strlen(map->file[i]);
-		if (current_line > longest_line)
-			longest_line = ft_strlen(map->file[i]);
-		i++;
-	}
-	return (longest_line);
-}
+static int	get_longest_line(t_wholemap *map, int i);
+int			count_map_lines(t_data *data, char **map, int x);
 
 int	fill_map_tab(t_wholemap *wholemap, char **map_tab, int start)
 {
@@ -68,10 +34,48 @@ int	fill_map_tab(t_wholemap *wholemap, char **map_tab, int start)
 			j++;
 		}
 		while (j < wholemap->width)
-			map_tab[i][j++] = '\0';
+			map_tab[i][j++] = ' ';
+		map_tab[i][j++] = '\0';
 		i++;
 		start++;
 	}
 	map_tab[i] = NULL;
 	return (0);
+}
+
+static int	get_longest_line(t_wholemap *map, int i)
+{
+	int	longest_line;
+	int	current_line;
+
+	current_line = ft_strlen(map->file[i]);
+	longest_line = ft_strlen(map->file[i]);
+	while (map->file[i])
+	{
+		current_line = ft_strlen(map->file[i]);
+		if (current_line > longest_line)
+			longest_line = ft_strlen(map->file[i]);
+		i++;
+	}
+	return (longest_line);
+}
+
+int	count_map_lines(t_data *data, char **map, int x)
+{
+	int	count;
+	int	y;
+
+	count = 0;
+	while (map[x])
+	{
+		y = 0;
+		while (ft_isspace(map[x][y]))
+			y++;
+		if (map[x][y] != '1')
+			break ;
+		x++;
+		count++;
+	}
+	data->wholemap.index_end_of_map = x;
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 19:29:10 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 14:35:44 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
 
+#define TOP(i)    ((i) - 1)
+#define DOWN(i)     ((i) + 1)
+#define LEFT(j)  ((j) - 1)
+#define RIGHT(j)  ((j) + 1)
+
 #include <math.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <fcntl.h> //for open
 #include "../minilibx-linux/mlx.h"
 #include "../libft/includes/libft.h"
@@ -122,6 +128,7 @@ typedef struct s_data
 	void		*win;
 	int			win_height;
 	int			win_width;
+	int			player_count;
 	t_wholemap	wholemap;
 	char		**map;
 	t_player	player;
@@ -133,15 +140,13 @@ typedef struct s_data
 }	t_data;
 
 // Check valid
-int		file_valid(char *file);
-int		path_valid(char *path);
+int		check_border_walls(t_data *data, char **map);
 int 	check_digit(char *line);
 int		check_color(char *line);
 int		check_texture(char *line);
 int		check_cub_file(char *path);
 int 	check_map(t_data *data);
 char	**split_color(char *line);
-
 
 // Utils
 void	jump_space(char *line);
@@ -158,7 +163,11 @@ int		parse_color(t_texinfo *texinfo, int *color, char *line);
 int		parse_line(t_data *data, char *line);
 int		parse_cub_file(t_data *data, char *path);
 
-// Init
+// Player
+void	init_player_west_east(t_player *player);
+void	init_player_north_south(t_player *player);
 
+// Init
 void	init_data(t_data *data);
+
 #endif

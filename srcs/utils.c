@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 19:58:30 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:40:01 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-int	error_msg(char *str, int error) // add without exit
+int	error_msg(char *str, int error)
 {
 	ft_putstr_fd(RED, 2);
 	ft_putstr_fd(str, 2);

@@ -6,11 +6,33 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:42:29 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/14 13:31:17 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:57:20 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	parse_texture(t_texinfo *texinfo, char *line);
+int	parse_color(t_texinfo *texinfo, int *color, char *line);
+
+int	parse_line(t_data *data, char *line)
+{
+	// Skip empty lines
+	if (line[0] == '\0' || line[0] == '\n')
+		return (0);
+	// Check if the line contains texture information
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
+		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
+		return (parse_texture(&data->texinfo, line));
+	// Check if the line contains color information
+	if (ft_strncmp(line, "F ", 2) == 0)
+		return (parse_color(&data->texinfo, data->texinfo.floor, line));
+	if (ft_strncmp(line, "C ", 2) == 0)
+		return (parse_color(&data->texinfo, data->texinfo.ceiling, line));
+	// If it's not a texture or color, it must be part of the map
+	// (Handling of map parsing will come later)
+	return (0);
+}
 
 int	parse_texture(t_texinfo *texinfo, char *line)
 {
@@ -50,24 +72,5 @@ int	parse_color(t_texinfo *texinfo, int *color, char *line)
 		texinfo->hex_ceiling = (color[0] << 16) | (color[1] << 8) | color[2];
 		printf("Ceiling Color (Decimal): %ld\n\n\n", texinfo->hex_ceiling);
 	}
-	return (0);
-}
-
-int	parse_line(t_data *data, char *line)
-{
-	// Skip empty lines
-	if (line[0] == '\0' || line[0] == '\n')
-		return (0);
-	// Check if the line contains texture information
-	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
-		return (parse_texture(&data->texinfo, line));
-	// Check if the line contains color information
-	if (ft_strncmp(line, "F ", 2) == 0)
-		return (parse_color(&data->texinfo, data->texinfo.floor, line));
-	if (ft_strncmp(line, "C ", 2) == 0)
-		return (parse_color(&data->texinfo, data->texinfo.ceiling, line));
-	// If it's not a texture or color, it must be part of the map
-	// (Handling of map parsing will come later)
 	return (0);
 }

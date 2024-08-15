@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:18:43 by leochen           #+#    #+#             */
-/*   Updated: 2024/08/14 10:31:32 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/15 10:19:54 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_data(t_data *data)
 	data->win = NULL;
 	data->win_height = 720;
 	data->win_width = 960;
+	data->player_count = 0;
 	data->map = NULL;
 	data->texture_pixels = NULL;
 	data->textures = NULL;
