@@ -6,13 +6,13 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/15 13:40:01 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/17 19:34:08 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	free_tab(char **tab)
+void	free_tab(void **tab)
 {
 	int	i;
 

@@ -6,13 +6,13 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/15 16:00:31 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/17 19:47:18 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int	file_valid(char *file);
+void	init_mlx(t_data *data);
 
 int	main(int ac, char **av)
 {
@@ -28,15 +28,19 @@ int	main(int ac, char **av)
 	check_map(&data);
 	// if (check_map(data) == -1)
 		// free_data(data);
+	init_mlx(&data);
+	//init_textures(&data);
+	//render_screen(&data);
 	return (0);
 }
 
-static int	file_valid(char *file)
+void	init_mlx(t_data *data)
 {
-	int	len;
-
-	len = ft_strlen(file);
-	if (ft_strncmp(&file[len - 4], ".cub", 4))
-		return (-1);
-	return (0);
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		//clean exit
+	data->win = mlx_new_window(data->mlx, 960, 720, "Cub3D");
+	if (!data->win)
+		//clean exit
+	return ;
 }

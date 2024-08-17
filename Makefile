@@ -9,12 +9,15 @@ OBJ_BONUS_DIR	= obj_bonus
 
 # Source
 CHECK = check_rgb_color.c check_cub_file.c check_map.c check_border_map.c
+INIT = init.c init_player_dir.c init_texture.c
 PARSING = parse_cub_file.c parse_map.c parse_tex.c parse_utils.c
-PLAYER = init_player_dir.c
+$PLAYER =
+RENDER = raycasting.c raycasting_utils.c render.c
 
-SRCS = $(CHECK:%=srcs/check/%)  $(PARSING:%=srcs/parsing/%) $(PLAYER:%=srcs/player/%) \
-	srcs/utils.c srcs/init.c
-	
+SRCS = $(CHECK:%=srcs/check/%) $(INIT:%=srcs/init/%) \
+	$(PARSING:%=srcs/parsing/%)  \
+	$(RENDER:%=srcs/render/%) \
+	srcs/utils.c
 SRCS_BONUS = 
 
 OBJS = $(SRCS:$(SRCS_PATH)/%.c=$(OBJ_DIR)/%.o)

@@ -16,6 +16,7 @@ static int	get_map(t_data *data, char **map, int x, int y);
 static int	create_map(t_data *data, char **map, int x);
 static void	replace_space(t_data *data);
 
+// To delete
 static int	print_map(char **map, int x, int y)
 {
 	while (map[x] != NULL)
@@ -31,6 +32,7 @@ static int	print_map(char **map, int x, int y)
 	}
 	return (0);
 }
+
 
 int	parse_map(t_data *data, char **map)
 {

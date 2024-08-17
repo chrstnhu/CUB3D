@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:42:29 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/15 13:57:20 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/17 18:44:29 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse_color(t_texinfo *texinfo, int *color, char *line)
 	color[0] = ft_atoi(rgb_parts[0]);
 	color[1] = ft_atoi(rgb_parts[1]);
 	color[2] = ft_atoi(rgb_parts[2]);
-	free_tab(rgb_parts);
+	free_tab((void **)rgb_parts);
 	if (color == texinfo->floor)
 	{
 		texinfo->hex_floor = (color[0] << 16) | (color[1] << 8) | color[2];

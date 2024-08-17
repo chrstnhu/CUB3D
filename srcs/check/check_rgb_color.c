@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:09:11 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/15 13:56:15 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/17 18:44:24 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,17 @@ int	check_color(char *line)
 		if (!rgb_parts[i] || (ft_atoi(rgb_parts[i]) < 0
 				|| ft_atoi(rgb_parts[i]) > 255))
 		{
-			free_tab(rgb_parts);
+			free_tab((void **)rgb_parts);
 			return (-1);
 		}
 		i++;
 	}
 	if (rgb_parts[i] != NULL && *rgb_parts[i] != '\0')
 	{
-		free_tab(rgb_parts);
+		free_tab((void **)rgb_parts);
 		return (-1);
 	}
-	free_tab(rgb_parts);
+	free_tab((void **)rgb_parts);
 	return (0);
 }
 
