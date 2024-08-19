@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/17 18:44:43 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/19 15:31:14 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	parse_cub_file(t_data *data, char *path)
 	data->wholemap.path = path;
 	data->wholemap.fd = open(path, O_RDONLY);
 	fd = open(path, O_RDONLY);
+	printf("parse_cub_file  data->wholemap.path:%s\n", data->wholemap.path);
 	if (fd < 0 || data->wholemap.fd < 0)
 		return (error_exit(RED"Error\nInvalid file"DEF));
 	line = get_next_line(fd);

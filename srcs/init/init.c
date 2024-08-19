@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:18:43 by leochen           #+#    #+#             */
-/*   Updated: 2024/08/17 19:34:24 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/19 11:31:44 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ static void	init_texinfo(t_texinfo *texinfo)
 		error_exit(RED"Error\nMemory allocation failed for floor color"DEF);
 	texinfo->ceiling = malloc(3 * sizeof(int));
 	if (!texinfo->ceiling)
+	{
+		free(texinfo->floor);
 		error_exit(RED"Error\nMemory allocation failed for ceiling color"DEF);
+	}
 	texinfo->hex_floor = 0;
 	texinfo->hex_ceiling = 0;
 	texinfo->size = 0;

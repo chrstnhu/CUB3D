@@ -1,5 +1,6 @@
 # Path to libraries
 MLX_PATH = ./minilibx-linux/
+#MLX_PATH = ./mlx_linux
 LIBFT_PATH = ./libft
 LIBS_PATH = -L$(LIBFT_PATH) -L$(MLX_PATH)
 SRCS_PATH = srcs
@@ -11,13 +12,13 @@ OBJ_BONUS_DIR	= obj_bonus
 CHECK = check_rgb_color.c check_cub_file.c check_map.c check_border_map.c
 INIT = init.c init_player_dir.c init_texture.c
 PARSING = parse_cub_file.c parse_map.c parse_tex.c parse_utils.c
-$PLAYER =
-RENDER = raycasting.c raycasting_utils.c render.c
+#PLAYER =
+RENDER = raycasting.c raycasting_utils.c render.c handler_key.c
 
 SRCS = $(CHECK:%=srcs/check/%) $(INIT:%=srcs/init/%) \
 	$(PARSING:%=srcs/parsing/%)  \
 	$(RENDER:%=srcs/render/%) \
-	srcs/utils.c
+	srcs/utils.c  srcs/error.c
 SRCS_BONUS = 
 
 OBJS = $(SRCS:$(SRCS_PATH)/%.c=$(OBJ_DIR)/%.o)

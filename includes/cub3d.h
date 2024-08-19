@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/17 19:51:47 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/19 15:41:38 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define DEF "\033[0;39m"
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
+# define BLUE "\033[0;34m"
+# define YELLOW "\033[0;33m"
 
 #define TOP(i)    ((i) - 1)
 #define DOWN(i)     ((i) + 1)
@@ -27,10 +29,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <fcntl.h> //for open
+# include <X11/keysym.h>
+# include <X11/X.h>
 #include "../minilibx-linux/mlx.h"
 #include "../libft/includes/libft.h"
-
-
 
 enum e_texture_index
 {
@@ -39,7 +41,6 @@ enum e_texture_index
 	EA = 2,
 	WE = 3,
 };
-
 
 typedef struct s_img
 {
@@ -96,7 +97,6 @@ typedef struct s_player
 
 }			t_player;
 
-
 typedef struct s_playermap
 {
 	char	**map;
@@ -107,8 +107,6 @@ typedef struct s_playermap
 	int		view_dist;
 	int		tile_size;
 }	t_minimap;
-
-
 
 typedef struct s_ray
 {
@@ -175,10 +173,14 @@ char	**split_color(char *line);
 int 	check_map(t_data *data);
 
 // Utils
-void	jump_space(char *line);
+void 	jump_space(char **line);
+void	free_tab(void **tab);
+void 	trim(char **str);
+
+// Error
 int		error_exit(char *s);
 int		error_msg(char *str, int error);
-void	free_tab(void **tab);
+void 	clean_exit(t_data *data, char *error_message, int code);
 
 // Parsing
 int 	count_map_lines(t_data *data, char **map, int i);
@@ -207,10 +209,11 @@ void	init_player_north_south(t_player *player);
 //main.c
 
 //render.c
-
 void	render_screen(t_data *data);
 void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x);
 void	render_frame(t_data *data);
+int 	close_win(t_data *data);
+int 	key_player_move(int keysym, t_data *data);
 
 // Raycasting
 int		raycasting(t_data *data);

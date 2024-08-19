@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:42:29 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/17 18:44:29 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/19 15:31:56 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	parse_line(t_data *data, char *line)
 
 int	parse_texture(t_texinfo *texinfo, char *line)
 {
+	printf(YELLOW"Enter texture:\n"DEF);
+	trim(&line);
 	if (!ft_strncmp(line, "NO ", 3))
 		texinfo->north = ft_strdup(line + 3);
 	else if (!ft_strncmp(line, "SO ", 3))
@@ -46,11 +48,18 @@ int	parse_texture(t_texinfo *texinfo, char *line)
 		texinfo->east = ft_strdup(line + 3);
 	else
 		return (-1);
+	
+	printf("North: (%s)\n", texinfo->north);
+	printf("South: (%s)\n", texinfo->south);
+	printf("West: (%s)\n", texinfo->west);
+	printf("East: (%s)\n", texinfo->east);
+	
 	return (0);
 }
 
 int	parse_color(t_texinfo *texinfo, int *color, char *line)
 {
+	printf(YELLOW"Enter parse color\n"DEF);
 	char	**rgb_parts;
 
 	if (!color)

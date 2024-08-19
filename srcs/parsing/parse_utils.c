@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:37:43 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/15 15:54:37 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/19 13:34:17 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	fill_map_tab(t_wholemap *wholemap, char **map_tab, int start)
 	int	j;
 
 	i = 0;
-	wholemap->width = get_longest_line(wholemap, start);
+	wholemap->width = get_longest_line(wholemap, start) - 1;
 	while (i < wholemap->height)
 	{
 		j = 0;

@@ -1,12 +1,13 @@
-NO ./path_to_the_north_texture.xpm
-SO ./path_to_the_south_texture.xpm
-WE ./path_to_the_west_texture.xpm
-EA ./path_to_the_east_texture.xpm
+NO textures/simonkraft/wet_sponge.xpm  
+SO textures/simonkraft/wet_sponge.xpm  
+WE textures/simonkraft/wet_sponge.xpm
+EA textures/simonkraft/wet_sponge.xpm
+
 F 220,100,0
-C 225,30,0
+C 153,204,255
 
 1111111111
-110000111
+110000111 
 1100101111
 110N010111
 1110001011

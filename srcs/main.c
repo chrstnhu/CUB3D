@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/17 19:47:18 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/19 15:39:41 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,32 @@ int	main(int ac, char **av)
 		error_exit(RED"Usage:./cub3D maps/file.cub"DEF);
 	if (file_valid(av[1]) == -1)
 		error_exit(RED"Invalid file, please end with .cub"DEF);
+	// printf("1. here before check_cub_file()\n");
 	check_cub_file(av[1]);
 	init_data(&data);
+	
+	printf(YELLOW"Before parse_cub_file\n"DEF);
 	parse_cub_file(&data, av[1]);
+
+	printf(YELLOW"Before check_map\n"DEF);
 	check_map(&data);
 	// if (check_map(data) == -1)
 		// free_data(data);
+
+	printf(YELLOW"Before init_mlx\n"DEF);
 	init_mlx(&data);
-	//init_textures(&data);
-	//render_screen(&data);
+	
+	printf(YELLOW"Before init_textures\n"DEF);
+	init_textures(&data);
+
+	printf(YELLOW"Before render_screen\n"DEF);
+	render_screen(&data);
+	printf(YELLOW"After render_screen\n"DEF);
+	
+	// file -> input_handler
+	mlx_hook(data.win, ClientMessage, NoEventMask, close_win, &data); // close with the X
+	mlx_hook(data.win, 2, KeyPressMask, key_player_move, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }
 
@@ -38,9 +55,9 @@ void	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		//clean exit
+		clean_exit(data, "mlx_init failed", 1);
 	data->win = mlx_new_window(data->mlx, 960, 720, "Cub3D");
 	if (!data->win)
-		//clean exit
+		clean_exit(data, "mlx_new_window failed", 1);
 	return ;
 }
