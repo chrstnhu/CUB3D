@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/19 15:41:38 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/20 12:29:23 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,8 @@ int 	key_player_move(int keysym, t_data *data);
 
 // Raycasting
 int		raycasting(t_data *data);
-void 	calc_delta_dist(t_data *data);
+void calc_delta_dist(t_data *data, int x);
+// void 	calc_delta_dist(t_data *data);
 void 	calc_side_dist(t_data *data);
 void	dda(t_data *data, t_ray *ray);
 void	calculate_line_height(t_data *data, t_ray *ray);

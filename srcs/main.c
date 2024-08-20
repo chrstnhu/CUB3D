@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/19 15:39:41 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/20 14:24:14 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int ac, char **av)
 	check_map(&data);
 	// if (check_map(data) == -1)
 		// free_data(data);
-
 	printf(YELLOW"Before init_mlx\n"DEF);
 	init_mlx(&data);
 	

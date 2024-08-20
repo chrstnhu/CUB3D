@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/19 15:31:14 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/20 12:08:02 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ static void	copy_cub_file(t_data *data)
 		return ;
 	while (line != NULL)
 	{
-		data->wholemap.file[row] = malloc((ft_strlen(line) + 1) * sizeof(char));
+		// data->wholemap.file[row] = malloc((ft_strlen(line) + 1) * sizeof(char));
+		// modif 
+		data->wholemap.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		if (!data->wholemap.file[row])
 			return (free_tab((void **)data->wholemap.file));
 		while (line[i] != '\0')

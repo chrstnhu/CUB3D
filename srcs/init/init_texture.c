@@ -17,7 +17,7 @@ static int	*xpm_to_img(t_data *data, char *path);
 static void	init_texture_img(t_data *data, t_img *image, char *path);
 void		init_texture_pix(t_data *data);
 
-// Initialize rays
+// Initialize rays -- OK
 void	init_ray(t_ray *ray)
 {
 	ray->camera_plane_x = 0;// 初始化摄像机平面的X坐标
@@ -44,7 +44,7 @@ void	init_textures(t_data *data)
 	printf(YELLOW"\nEnter init_textures\n"DEF);
 	data->textures = ft_calloc(5, sizeof * data->textures);
 	if (!data->textures)
-		//clean_exit(data, err_msg(NULL, ERR_MALLOC, 1));
+		clean_exit(data, "malloc data texture failed", 1);
 	data->textures[NO] = xpm_to_img(data, data->texinfo.north);
 	printf("NO: %s\n", data->texinfo.north);
 	data->textures[SO] = xpm_to_img(data, data->texinfo.south);
@@ -106,6 +106,7 @@ static void	init_texture_img(t_data *data, t_img *image, char *path)
 	return ;
 }
 
+//OK
 void	init_texture_pix(t_data *data)
 {
 	int	i;
