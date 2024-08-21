@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/17 19:13:06 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/21 19:03:49 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static int	add_player_pos(t_data *data, char **map);
 int	check_map(t_data *data)
 {
 	if (!data->map)
-		return (error_msg("Invalid : no map", -1));
+		clean_exit(data, "no map", 1);
 	if (data->wholemap.height < 3 || data->wholemap.width < 3)
-		return (error_msg("Invalid : map too small", -1));
+		clean_exit(data, "map too small", 1);
 	if (check_map_char(data, data->map) == -1)
-		return (error_msg("Invalid : character", -1));
+		clean_exit(data, "character", 1);
 	if (check_border_walls(data, data->map) == -1)
-		return (error_msg("Invalid : border walls", -1));
+		clean_exit(data, "border walls", 1);
 	if (add_player_pos(data, data->map) == -1)
-		return (error_msg("Invalid : player direction", -1));
+		clean_exit(data, "player direction", 1);
 	return (0);
 }
 
@@ -76,8 +76,6 @@ static int	add_player_pos(t_data *data, char **map)
 			if (ft_strchr("NSEW", map[x][y]))
 			{
 				// Place the player at the center of the bloc;
-				init_player_north_south(&data->player);
-				init_player_west_east(&data->player);
 				data->player.pos_x = (double)x + 0.5;
 				data->player.pos_y = (double)y + 0.5;
 			}
@@ -85,5 +83,7 @@ static int	add_player_pos(t_data *data, char **map)
 		}
 		x++;
 	}
+	init_player_north_south(&data->player);
+	init_player_west_east(&data->player);
 	return (0);
 }

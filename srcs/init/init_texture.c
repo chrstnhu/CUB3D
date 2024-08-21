@@ -38,21 +38,22 @@ void	init_ray(t_ray *ray)
 	ray->draw_end = 0;// 初始化墙壁在屏幕上绘制的结束点
 }
 
-// Initialize texture img
+// Initialize texture img -- OK
 void	init_textures(t_data *data)
 {
-	printf(YELLOW"\nEnter init_textures\n"DEF);
+	//printf(YELLOW"\nEnter init_textures\n"DEF);
+
 	data->textures = ft_calloc(5, sizeof * data->textures);
 	if (!data->textures)
 		clean_exit(data, "malloc data texture failed", 1);
 	data->textures[NO] = xpm_to_img(data, data->texinfo.north);
-	printf("NO: %s\n", data->texinfo.north);
+	//printf("NO: %s\n", data->texinfo.north);
 	data->textures[SO] = xpm_to_img(data, data->texinfo.south);
-	printf("SO: %s\n", data->texinfo.south);
+	//printf("SO: %s\n", data->texinfo.south);
 	data->textures[EA] = xpm_to_img(data, data->texinfo.east);
-	printf("EA: %s\n", data->texinfo.east);
+	//printf("EA: %s\n", data->texinfo.east);
 	data->textures[WE] = xpm_to_img(data, data->texinfo.west);
-	printf("WE: %s\n", data->texinfo.west);
+	//printf("WE: %s\n", data->texinfo.west);
 }
 
 // Transform xpm to img for minilibx
@@ -65,6 +66,10 @@ static int	*xpm_to_img(t_data *data, char *path)
 
 	y = 0;
 	init_texture_img(data, &tmp, path);
+	
+	//printf("Image loaded from %s with size %dx%d\n", path, data->texinfo.size, data->texinfo.size);
+	//printf("Image address: %p\n", tmp.addr);
+
 	buffer = ft_calloc(1,
 			sizeof * buffer * data->texinfo.size * data->texinfo.size);
 	if (!buffer)
@@ -91,20 +96,20 @@ static void	init_texture_img(t_data *data, t_img *image, char *path)
 
 	init_img_clean(image);
 	i++;
-	printf("Loading image from path: %s with index : %d\n", path, i );
+	//printf("Loading image from path: %s with index : %d\n", path, i );
 	image->mlx_img = mlx_xpm_file_to_image(data->mlx, path, &data->texinfo.size,
 			&data->texinfo.size);
 	if (image->mlx_img == NULL)
-	{
-		printf("Error loading image from path: %s\n", path);
         clean_exit(data, "mlx_xmp_file_to_img error", 1);
-	}
-	image->addr = mlx_get_data_addr(image->mlx_img, &image->bpp,
+	image->addr = (int *)mlx_get_data_addr(image->mlx_img, &image->bpp,
 				&image->line_len, &image->endian);
 	if (image->addr == NULL)
         clean_exit(data, "mlx_get data_addr error", 1);
 	return ;
 }
+
+
+
 
 //OK
 void	init_texture_pix(t_data *data)
@@ -124,5 +129,5 @@ void	init_texture_pix(t_data *data)
 			clean_exit(data, "Malloc failed for texture pix width", 1);
 		i++;
 	}
-	printf(GREEN"Texture pixels allocated successfully\n"DEF);
+	// printf(GREEN"Texture pixels allocated successfully\n"DEF);
 }

@@ -19,16 +19,16 @@ static void	set_image_pixel(t_img *image, int x, int y, int color);
 
 void	render_screen(t_data *data)
 {
-	printf(YELLOW"\nBefore init_texture_pix\n"DEF);
+	// printf(YELLOW"\nBefore init_texture_pix\n"DEF);
 	init_texture_pix(data);
 
-	printf(YELLOW"\nBefore init_ray\n"DEF);
+	// printf(YELLOW"\nBefore init_ray\n"DEF);
 	init_ray(&data->ray);
 
-	printf(YELLOW"\nBefore raycasting\n"DEF);
+	// printf(YELLOW"\nBefore raycasting\n"DEF);
 	raycasting(data);
 
-	printf(YELLOW"\nBefore render_frame\n"DEF);
+	// printf(YELLOW"\nBefore render_frame\n"DEF);
 	render_frame(data);
 }
 
@@ -66,21 +66,22 @@ void	init_img(t_data *data, t_img *image, int width, int height)
 	image->mlx_img = mlx_new_image(data->mlx, width, height);
 	if (image->mlx_img == NULL)
 		clean_exit(data, "mlx_new_image failed", 1);
-	image->addr = mlx_get_data_addr(image->mlx_img, &image->bpp,
+	image->addr = (int *)mlx_get_data_addr(image->mlx_img, &image->bpp,
 				&image->line_len, &image->endian);
 	if (image->addr == NULL)
 		clean_exit(data, "mlx_get_data_addr failed", 1);
 	return ;
 }
+
 static void set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 {
     if (x >= data->win_width || y >= data->win_height || x < 0 || y < 0)
     {
-        printf(RED"Error: Coordinates (%d, %d) are out of bounds\n"DEF, x, y);
+        //printf(RED"Error: Coordinates (%d, %d) are out of bounds\n"DEF, x, y);
         return;
     }
     if (data->texture_pixels == NULL || data->texture_pixels[y] == NULL) {
-        printf(RED"Error: texture_pixels not initialized or row %d is NULL\n"DEF, y);
+        //printf(RED"Error: texture_pixels not initialized or row %d is NULL\n"DEF, y);
         return;
     }
 
@@ -88,30 +89,30 @@ static void set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
     if (color > 0)
     {
         set_image_pixel(image, x, y, color);
-        if (x == data->win_width / 2 && y == data->win_height / 2)
-        {
-            printf("Middle pixel: Using texture color %d\n", color);
-        }
+        // if (x == data->win_width / 2 && y == data->win_height / 2)
+        // {
+        //     printf("Middle pixel: Using texture color %d\n", color);
+        // }
     }
     else if (y < data->win_height / 2)
     {
         set_image_pixel(image, x, y, data->texinfo.hex_ceiling);
-        if (x == data->win_width / 2 && y == data->win_height / 4)
-        {
-            printf("Ceiling color: %ld\n", data->texinfo.hex_ceiling);
-        }
+        // if (x == data->win_width / 2 && y == data->win_height / 4)
+        // {
+        //     printf("Ceiling color: %ld\n", data->texinfo.hex_ceiling);
+        // }
     }
     else
     {
         set_image_pixel(image, x, y, data->texinfo.hex_floor);
-        if (x == data->win_width / 2 && y == data->win_height * 3 / 4)
-        {
-            printf("Floor color: %ld\n", data->texinfo.hex_floor);
-        }
+        // if (x == data->win_width / 2 && y == data->win_height * 3 / 4)
+        // {
+        //     printf("Floor color: %ld\n", data->texinfo.hex_floor);
+        // }
     }
 }
 
-/*
+
 // Windows : top white and bottom black
 static void	set_image_pixel(t_img *image, int x, int y, int color)
 {
@@ -120,10 +121,10 @@ static void	set_image_pixel(t_img *image, int x, int y, int color)
 	pixel = y * (image->line_len / 4) + x;
 	image->addr[pixel] = color;
 }
-*/
+
 
 // Window : top color ceiling, bottom color floor
-
+/*
 static void set_image_pixel(t_img *image, int x, int y, int color)
 {
 	if (image->addr == NULL) 
@@ -159,3 +160,4 @@ static void set_image_pixel(t_img *image, int x, int y, int color)
 	// Assigner la couleur au pixel
 	((int *)image->addr)[pixel_index] = color;
 }
+*/

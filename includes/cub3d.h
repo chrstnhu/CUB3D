@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/20 12:29:23 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/21 18:05:24 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ enum e_texture_index
 typedef struct s_img
 {
 	void *mlx_img;
-	char *addr;
+	//char *addr;
+	int *addr;
 	int bpp;
 	int line_len;
 	int endian;
@@ -159,6 +160,17 @@ typedef struct s_data
 	t_img		playermap;
 }	t_data;
 
+
+typedef struct s_map_elements
+{
+    int north;
+    int south;
+    int west;
+    int east;
+    int floor;
+    int ceiling;
+} texinfo;
+
 // Check cub file
 int		file_valid(char *file);
 int		check_cub_file(char *path);
@@ -213,14 +225,22 @@ void	render_screen(t_data *data);
 void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x);
 void	render_frame(t_data *data);
 int 	close_win(t_data *data);
-int 	key_player_move(int keysym, t_data *data);
+int 	key_press(int keysym, t_data *data);
+int 	key_release(int keysym, t_data *data);
 
 // Raycasting
 int		raycasting(t_data *data);
-void calc_delta_dist(t_data *data, int x);
-// void 	calc_delta_dist(t_data *data);
+void 	calc_delta_dist(t_data *data, int x);
 void 	calc_side_dist(t_data *data);
 void	dda(t_data *data, t_ray *ray);
 void	calculate_line_height(t_data *data, t_ray *ray);
+
+// Player
+int		player_move(t_data *data);
+int 	validate_move(t_data *data, double x, double y);
+
+
+ int checkk_texture(char *line, texinfo *elements);
+ int validate_map(texinfo *elements);
 
 #endif

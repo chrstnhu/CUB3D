@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/15 15:52:42 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/21 19:02:35 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_border_walls(t_data *data, char **map)
 			{
 				if (check_walls(map, x, y, data->wholemap.height) == -1)
 				{
-					ft_printf(RED"Invalid at (%d, %d)\n"DEF, x, y);
+					//ft_printf(RED"Invalid at (%d, %d)\n"DEF, x, y);
 					return (-1);
 				}
 			}

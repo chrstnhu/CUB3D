@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:02:32 by leochen           #+#    #+#             */
-/*   Updated: 2024/08/20 14:31:24 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/21 13:04:04 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	calculate_line_height(t_data *data, t_ray *ray)
 }
 
 // Update texture original
-
-/*
 void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 {
 	int			y;
@@ -71,10 +69,10 @@ void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 		y++;
 	}
 }
-*/
+
 
 // Update texture with printf
-
+/*
 void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 {
 	printf(YELLOW"Enter texture pix\n"DEF);
@@ -136,8 +134,8 @@ void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 		color = data->textures[tex->index][tex->size * tex->y + tex->x];
 
 		// Vérification des couleurs nulles
-		if (color == 0)
-	        printf(RED"Warning: Color at (Tex X: %d, Tex Y: %d) is zero, possible issue.\n"DEF, tex->x, tex->y);
+		// if (color == 0)
+	        // printf(RED"Warning: Color at (Tex X: %d, Tex Y: %d) is zero, possible issue.\n"DEF, tex->x, tex->y);
 
 		// Ajustement de la couleur pour certaines textures
 		if (tex->index == NO || tex->index == EA)
@@ -146,18 +144,18 @@ void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 		// Assignation de la couleur au pixel de l'écran
 		if (color > 0)
         	data->texture_pixels[y][x] = color;
-		else
-    		printf(YELLOW"Pixel at screen (%d, %d) not set because color is %d.\n"DEF, y, x, color);
+		// else
+    		// printf(YELLOW"Pixel at screen (%d, %d) not set because color is %d.\n"DEF, y, x, color);
 		
 		y++;
 	}
 }
-
+*/
 
 // Get the texture
 static void	get_texture_index(t_data *data, t_ray *ray)
 {
-	printf(YELLOW"Enter get_texture_index\n"DEF);
+	// printf(YELLOW"Enter get_texture_index\n"DEF);
 	if (ray->hit_side == 0)
 	{
 		if (ray->ray_dir_x < 0)

@@ -17,22 +17,22 @@ static int	create_map(t_data *data, char **map, int x);
 static void	replace_space(t_data *data);
 
 // To delete
-static int	print_map(char **map, int x, int y)
-{
-	while (map[x] != NULL)
-	{
-		while (map[x][y] != '\0')
-		{
-			printf("[%c]", map[x][y]);
-			y++;
-		}
-		printf("\n");
-		x++;
-		y = 0; // Réinitialiser la colonne pour la prochaine ligne
-	}
-	printf("\n");
-	return (0);
-}
+// static int	print_map(char **map, int x, int y)
+// {
+// 	while (map[x] != NULL)
+// 	{
+// 		while (map[x][y] != '\0')
+// 		{
+// 			printf("[%c]", map[x][y]);
+// 			y++;
+// 		}
+// 		printf("\n");
+// 		x++;
+// 		y = 0; // Réinitialiser la colonne pour la prochaine ligne
+// 	}
+// 	printf("\n");
+// 	return (0);
+// }
 
 int	parse_map(t_data *data, char **map)
 {
@@ -85,7 +85,7 @@ static int	get_map(t_data *data, char **map, int x, int y)
 
 static int	create_map(t_data *data, char **map, int x)
 {
-	printf(YELLOW"Create map :\n"DEF);
+	//printf(YELLOW"Create map :\n"DEF);
 	data->wholemap.height = count_map_lines(data, map, x);
 	data->map = malloc(sizeof(char *) * (data->wholemap.height + 1));
 	if (!data->map)
@@ -123,5 +123,5 @@ static void	replace_space(t_data *data)
 			y++;
 		}
 	}
-	print_map(data->map, 0, 0);
+	//print_map(data->map, 0, 0);
 }

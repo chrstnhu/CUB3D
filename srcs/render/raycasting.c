@@ -20,9 +20,9 @@ void	dda(t_data *data, t_ray *ray);
 int raycasting(t_data *data)
 {
     int x;
-	printf("Raycasting: player at (%f, %f), direction: (%f, %f)\n",
-           data->player.pos_x, data->player.pos_y, 
-           data->player.dir_x, data->player.dir_y);
+	// printf("Raycasting: player at (%f, %f), direction: (%f, %f)\n",
+        //    data->player.pos_x, data->player.pos_y, 
+        //    data->player.dir_x, data->player.dir_y);
     x = 0;
     while (x < data->win_width)
     {
@@ -50,7 +50,7 @@ void calc_delta_dist(t_data *data, int x)
     data->ray.map_grid_x = (int)data->player.pos_x;
     data->ray.map_grid_y = (int)data->player.pos_y;
     
-    printf("Initial map position: (%d, %d)\n", data->ray.map_grid_x, data->ray.map_grid_y);
+    // printf("Initial map position: (%d, %d)\n", data->ray.map_grid_x, data->ray.map_grid_y);
     
     if (data->ray.ray_dir_x == 0)
         data->ray.delta_dist_x = 1e30;
@@ -61,8 +61,8 @@ void calc_delta_dist(t_data *data, int x)
     else
         data->ray.delta_dist_y = fabs(1 / data->ray.ray_dir_y);
 
-printf("Ray direction: (%f, %f)\n", data->ray.ray_dir_x, data->ray.ray_dir_y);
-    printf("Delta distances: (%f, %f)\n", data->ray.delta_dist_x, data->ray.delta_dist_y);
+// printf("Ray direction: (%f, %f)\n", data->ray.ray_dir_x, data->ray.ray_dir_y);
+    // printf("Delta distances: (%f, %f)\n", data->ray.delta_dist_x, data->ray.delta_dist_y);
 }
 
 
@@ -98,7 +98,7 @@ void	calc_side_dist(t_data *data) // more than 25 line
 		ray->step_y = 1; // 光线向下移动
 		ray->side_dist_y = (ray->map_grid_y + 1.0 - pos_y) * ray->delta_dist_y;
 	}
-	printf("Side distances: (%f, %f)\n", ray->side_dist_x, ray->side_dist_y);
+	// printf("Side distances: (%f, %f)\n", ray->side_dist_x, ray->side_dist_y);
 }
 
 void dda(t_data *data, t_ray *ray)
@@ -106,9 +106,9 @@ void dda(t_data *data, t_ray *ray)
     int hit;
 
     hit = 0;
-    printf("Starting DDA: player at (%f, %f), ray direction (%f, %f)\n", 
-           data->player.pos_x, data->player.pos_y, ray->ray_dir_x, ray->ray_dir_y);
-    printf("Initial map position: (%d, %d)\n", ray->map_grid_x, ray->map_grid_y);
+    // printf("Starting DDA: player at (%f, %f), ray direction (%f, %f)\n", 
+        //    data->player.pos_x, data->player.pos_y, ray->ray_dir_x, ray->ray_dir_y);
+    // printf("Initial map position: (%d, %d)\n", ray->map_grid_x, ray->map_grid_y);
     
     while (hit == 0)
     {
@@ -125,21 +125,21 @@ void dda(t_data *data, t_ray *ray)
             ray->hit_side = 1;
         }
 
-        printf("Checking position (%d, %d)\n", ray->map_grid_x, ray->map_grid_y);
+        // printf("Checking position (%d, %d)\n", ray->map_grid_x, ray->map_grid_y);
 
         if (ray->map_grid_y < 0 || ray->map_grid_x < 0 ||
             ray->map_grid_y >= data->wholemap.height ||
             ray->map_grid_x >= data->wholemap.width)
         {
-            printf("Ray out of bounds\n");
+            //printf("Ray out of bounds\n");
             break;
         }
         else if (data->map[ray->map_grid_y][ray->map_grid_x] == '1')
         {
             hit = 1;
-            printf("Wall hit at (%d, %d)\n", ray->map_grid_x, ray->map_grid_y);
+            // printf("Wall hit at (%d, %d)\n", ray->map_grid_x, ray->map_grid_y);
         }
     }
-	printf("Updated side_dist_x: %f, side_dist_y: %f\n", ray->side_dist_x, ray->side_dist_y);
+	// printf("Updated side_dist_x: %f, side_dist_y: %f\n", ray->side_dist_x, ray->side_dist_y);
 
 }

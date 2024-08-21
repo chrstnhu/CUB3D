@@ -12,13 +12,13 @@ OBJ_BONUS_DIR	= obj_bonus
 CHECK = check_rgb_color.c check_cub_file.c check_map.c check_border_map.c
 INIT = init.c init_player_dir.c init_texture.c
 PARSING = parse_cub_file.c parse_map.c parse_tex.c parse_utils.c
-#PLAYER =
+PLAYER = player_move.c validate_move.c
 RENDER = raycasting.c raycasting_utils.c render.c handler_key.c
 
 SRCS = $(CHECK:%=srcs/check/%) $(INIT:%=srcs/init/%) \
-	$(PARSING:%=srcs/parsing/%)  \
+	$(PARSING:%=srcs/parsing/%) $(PLAYER:%=srcs/player/%) \
 	$(RENDER:%=srcs/render/%) \
-	srcs/utils.c  srcs/error.c
+	srcs/utils.c  srcs/error.c srcs/main.c
 SRCS_BONUS = 
 
 OBJS = $(SRCS:$(SRCS_PATH)/%.c=$(OBJ_DIR)/%.o)
@@ -30,8 +30,8 @@ CFLAGS = -Wall -Wextra -Werror -g3
 LFLAGS = -Lminilibx-linux -lmlx -lX11 -lXext -lm -lbsd -lft
 INCLUDES = -I$(LIBFT_PATH) -I$(MLX_PATH) 
 
-NAME = cub3d
-NAME_BONUS = cub3d_bonus
+NAME = cub3D
+NAME_BONUS = cub3D_bonus
 
 # Create a objet directory
 $(OBJ_DIR)/%.o: $(SRCS_PATH)/%.c
@@ -50,7 +50,7 @@ bonus: $(NAME_BONUS)
 $(NAME): $(OBJS)
 #	make -C $(LIBFT_PATH)
 #	make -C $(MLX_PATH)
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS_PATH)/main.c  $(OBJS) $(LIBS_PATH) $(LFLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS_PATH) $(LFLAGS)
 	
 $(NAME_BONUS): $(OBJS_BONUS)
 #	make -C $(LIBFT_PATH)
