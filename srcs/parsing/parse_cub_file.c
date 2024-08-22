@@ -3,48 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/21 16:09:38 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 14:17:11 by leoniechen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void	copy_cub_file(t_data *data);
 static int	init_wholemap_file(t_data *data);
+static int	parse_lines(t_data *data, int fd);
 
-int	parse_cub_file(t_data *data, char *path)
+static int	open_cub_file(t_data *data, char *path)
 {
-	char	*line;
-	int		fd;
-
 	data->wholemap.path = path;
 	data->wholemap.fd = open(path, O_RDONLY);
+	if (data->wholemap.fd < 0)
+		return (error_exit("Invalid file"));
+	return (0);
+}
+
+// Parse cub file
+int	parse_cub_file(t_data *data, char *path)
+{
+	int	fd;
+
+	if (open_cub_file(data, path) == -1)
+		return (-1);
 	fd = open(path, O_RDONLY);
-	//printf("parse_cub_file  data->wholemap.path:%s\n", data->wholemap.path);
-	if (fd < 0 || data->wholemap.fd < 0)
-		return (error_exit(RED"Error\nInvalid file"DEF));
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line[0] == '\n')
-			free(line);
-		else
-		{
-			if (parse_line(data, line) == -1)
-				return (error_exit(RED"Error\nInvalid parsing"DEF));
-			free(line);
-		}
-		data->wholemap.line_count++;
-		line = get_next_line(fd);
-	}
+	if (fd < 0)
+		return (error_exit("Invalid file"));
+	if (parse_lines(data, fd) == -1)
+		return (-1);
 	copy_cub_file(data);
 	parse_map(data, data->wholemap.file);
 	return (close(data->wholemap.fd), 0);
 }
 
+// Copy in another file
 static void	copy_cub_file(t_data *data)
 {
 	int		i;
@@ -60,8 +58,6 @@ static void	copy_cub_file(t_data *data)
 		return ;
 	while (line != NULL)
 	{
-		// data->wholemap.file[row] = malloc((ft_strlen(line) + 1) * sizeof(char));
-		// modif 
 		data->wholemap.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		if (!data->wholemap.file[row])
 			return (free_tab((void **)data->wholemap.file));
@@ -76,14 +72,35 @@ static void	copy_cub_file(t_data *data)
 	data->wholemap.file[row] = NULL;
 }
 
+// Initialize the map file
 static int	init_wholemap_file(t_data *data)
 {
-	data->wholemap.file = malloc((data->wholemap.line_count \
-			+ 1) * sizeof(char *));
+	data->wholemap.file = malloc((data->wholemap.line_count + 1)
+			* sizeof(char *));
 	if (!(data->wholemap.file))
 	{
-		error_msg(RED"Error\nInvalid calloc"DEF, 0);
+		error_msg(RED "Error\nInvalid calloc" DEF, 0);
 		return (-1);
+	}
+	return (0);
+}
+
+static int	parse_lines(t_data *data, int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (line[0] != '\n' && parse_line(data, line) == -1)
+		{
+			get_next_line(-42);
+			free(line);
+			clean_exit(data, RED"Error\nInvalid line"DEF, 1);
+		}
+		free(line);
+		data->wholemap.line_count++;
+		line = get_next_line(fd);
 	}
 	return (0);
 }

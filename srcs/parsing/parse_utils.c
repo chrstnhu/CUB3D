@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:37:43 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/19 13:34:17 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 11:38:03 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	get_longest_line(t_wholemap *map, int i);
 int			count_map_lines(t_data *data, char **map, int x);
 
+// Fill map
 int	fill_map_tab(t_wholemap *wholemap, char **map_tab, int start)
 {
 	int	i;
@@ -43,6 +44,7 @@ int	fill_map_tab(t_wholemap *wholemap, char **map_tab, int start)
 	return (0);
 }
 
+// Find and return the longest line (row)
 static int	get_longest_line(t_wholemap *map, int i)
 {
 	int	longest_line;
@@ -60,6 +62,7 @@ static int	get_longest_line(t_wholemap *map, int i)
 	return (longest_line);
 }
 
+// Count line of the map
 int	count_map_lines(t_data *data, char **map, int x)
 {
 	int	count;

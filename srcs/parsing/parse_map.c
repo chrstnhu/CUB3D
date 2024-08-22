@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*																			*/
-/*														:::	  ::::::::   */
-/*   parse_map.c										:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: chrhu <chrhu@student.42.fr>				+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2024/08/13 10:30:50 by chrhu			 #+#	#+#			 */
-/*   Updated: 2024/08/15 11:36:27 by chrhu			###   ########.fr	   */
+/*														:::		::::::::   */
+/*   parse_map.c										:+:		:+:	:+:   */
+/*													+:+ +:+			+:+	 */
+/*   By: chrhu <chrhu@student.42.fr>				+#+  +:+		+#+		*/
+/*												+#+#+#+#+#+   +#+			*/
+/*   Created: 2024/08/13 10:30:50 by chrhu				#+#	#+#			 */
+/*   Updated: 2024/08/15 11:36:27 by chrhu			###   ########.fr		*/
 /*																			*/
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	get_map(t_data *data, char **map, int x, int y);
 static int	create_map(t_data *data, char **map, int x);
 static void	replace_space(t_data *data);
 
-// To delete
-// static int	print_map(char **map, int x, int y)
-// {
-// 	while (map[x] != NULL)
-// 	{
-// 		while (map[x][y] != '\0')
-// 		{
-// 			printf("[%c]", map[x][y]);
-// 			y++;
-// 		}
-// 		printf("\n");
-// 		x++;
-// 		y = 0; // Réinitialiser la colonne pour la prochaine ligne
-// 	}
-// 	printf("\n");
-// 	return (0);
-// }
-
+// Parse map
 int	parse_map(t_data *data, char **map)
 {
 	int	x;
@@ -59,6 +42,7 @@ int	parse_map(t_data *data, char **map)
 	return (0);
 }
 
+// Get the map
 static int	get_map(t_data *data, char **map, int x, int y)
 {
 	while (map[x] != NULL)
@@ -68,10 +52,6 @@ static int	get_map(t_data *data, char **map, int x, int y)
 		if (ft_isdigit((unsigned char)map[x][y]))
 		{
 			y = 0;
-			// printf("Found map section and count %d\n", data->wholemap.height);
-			// printf("Found map section and count %d\n",
-			// data->wholemap.index_end_of_map);
-			//print_map(map, i, j);
 			if (create_map(data, map, x) == -1)
 				return (error_msg(data->wholemap.path, -1));
 			else
@@ -83,9 +63,9 @@ static int	get_map(t_data *data, char **map, int x, int y)
 	return (0);
 }
 
+// Create map
 static int	create_map(t_data *data, char **map, int x)
 {
-	//printf(YELLOW"Create map :\n"DEF);
 	data->wholemap.height = count_map_lines(data, map, x);
 	data->map = malloc(sizeof(char *) * (data->wholemap.height + 1));
 	if (!data->map)
@@ -96,6 +76,7 @@ static int	create_map(t_data *data, char **map, int x)
 	return (0);
 }
 
+// Replace space to wall
 static void	replace_space(t_data *data)
 {
 	int	x;
@@ -119,9 +100,8 @@ static void	replace_space(t_data *data)
 		while (y <= end)
 		{
 			if (data->map[x][y] == ' ')
-				data->map[x][y] = '1'; // Remplacer par un mur :'1'
+				data->map[x][y] = '1';
 			y++;
 		}
 	}
-	//print_map(data->map, 0, 0);
 }

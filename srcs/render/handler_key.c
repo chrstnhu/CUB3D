@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   handler_key.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:27:29 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/21 16:04:02 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 13:12:17 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
+// Close window and clean
 int	close_win(t_data *data)
 {
 	clean_exit(data, "Window closed", 0);
 	return (0);
 }
 
+// Handler key press
 int	key_press(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
@@ -37,7 +39,8 @@ int	key_press(int keysym, t_data *data)
 	return (0);
 }
 
-int key_release(int keysym, t_data *data)
+// Handler key release
+int	key_release(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 		close_win(data);
@@ -53,5 +56,5 @@ int key_release(int keysym, t_data *data)
 		data->player.rotate = 0;
 	if (keysym == XK_Right && data->player.rotate >= -1)
 		data->player.rotate = 0;
-	return (0);	
+	return (0);
 }

@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:18:43 by leochen           #+#    #+#             */
-/*   Updated: 2024/08/21 16:26:06 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 13:47:41 by leoniechen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void		init_img_clean(t_img *img);
 static void	init_texinfo(t_texinfo *texinfo);
 static void	init_wholemap(t_wholemap *wholemap);
 static void	init_player(t_player *player);
 
+// Initialize data
 void	init_data(t_data *data)
 {
 	data->mlx = NULL;
@@ -33,6 +34,7 @@ void	init_data(t_data *data)
 	init_player(&data->player);
 }
 
+// Initialize img (clean img)
 void	init_img_clean(t_img *img)
 {
 	img->mlx_img = NULL;
@@ -42,6 +44,7 @@ void	init_img_clean(t_img *img)
 	img->endian = 0;
 }
 
+// Initialize texture info
 static void	init_texinfo(t_texinfo *texinfo)
 {
 	texinfo->north = NULL;
@@ -50,12 +53,12 @@ static void	init_texinfo(t_texinfo *texinfo)
 	texinfo->east = NULL;
 	texinfo->floor = malloc(3 * sizeof(int));
 	if (!texinfo->floor)
-		error_exit(RED"Error\nMemory allocation failed for floor color"DEF);
+		error_exit("Memory allocation failed for floor color");
 	texinfo->ceiling = malloc(3 * sizeof(int));
 	if (!texinfo->ceiling)
 	{
 		free(texinfo->floor);
-		error_exit(RED"Error\nMemory allocation failed for ceiling color"DEF);
+		error_exit("Memory allocation failed for ceiling color");
 	}
 	texinfo->hex_floor = 0;
 	texinfo->hex_ceiling = 0;
@@ -67,6 +70,7 @@ static void	init_texinfo(t_texinfo *texinfo)
 	texinfo->y = 0;
 }
 
+// Initialize the map
 static void	init_wholemap(t_wholemap *wholemap)
 {
 	wholemap->fd = 0;
@@ -78,6 +82,7 @@ static void	init_wholemap(t_wholemap *wholemap)
 	wholemap->index_end_of_map = 0;
 }
 
+// Initialize player
 static void	init_player(t_player *player)
 {
 	player->dir = '\0';

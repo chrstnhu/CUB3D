@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/21 19:02:35 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 12:10:33 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	check_border_walls(t_data *data, char **map)
 			if (map[x][y] == '0' || map[x][y] == 'N' || map[x][y] == 'S'
 				|| map[x][y] == 'E' || map[x][y] == 'W')
 			{
-				if (check_walls(map, x, y, data->wholemap.height) == -1)
-				{
-					//ft_printf(RED"Invalid at (%d, %d)\n"DEF, x, y);
+				if (x == 0 || x == data->wholemap.height - 1 || y == 0
+					|| y == data->wholemap.width - 1)
 					return (-1);
-				}
+				if (check_walls(map, x, y, data->wholemap.height) == -1)
+					return (-1);
 			}
 			y++;
 		}
@@ -50,24 +50,22 @@ static int	check_walls(char **map, int x, int y, int total_rows)
 	int	row_len;
 
 	row_len = ft_strlen(map[x]);
-	// Check if the cell coordinates are out of bounds
 	if (x < 0 || x >= total_rows || y < 0 || y >= row_len)
 	{
 		return (-1);
 	}
-	// Check if the cell contains a wall irregularity character
 	if (ft_strchr("0NSEW", map[x][y]))
 	{
 		if (is_adjacent_to_space(map, x, y, total_rows))
-			return (-1); // Adjacent to empty
+			return (-1);
 		if (is_surrounded_by_valid_walls(map, x, y, total_rows))
-			return (0); // Surrounded by non empty
+			return (0);
 		return (-1);
 	}
 	return (0);
 }
 
-// Check if any of the adjacent is empty
+// Check if any of the adjacent is empty (irregular wall)
 static int	is_adjacent_to_space(char **map, int x, int y, int rows)
 {
 	int	len;
@@ -81,21 +79,20 @@ static int	is_adjacent_to_space(char **map, int x, int y, int rows)
 	down = x + 1;
 	left = y - 1;
 	right = y + 1;
-	if ((top >= 0 && ft_isspace(map[top][y]))
-		|| (down < rows && ft_isspace(map[down][y]))
-		|| (left >= 0 && ft_isspace(map[x][left]))
-		|| (right < len && ft_isspace(map[x][right])))
+	if ((top >= 0 && ft_isspace(map[top][y])) || (down < rows
+			&& ft_isspace(map[down][y])) || (left >= 0
+			&& ft_isspace(map[x][left])) || (right < len
+			&& ft_isspace(map[x][right])))
 		return (1);
-	// Check if any of the diagonal cells is not a valid wall character
-	if ((top >= 0 && left >= 0 && ft_isspace(map[top][left]))
-		|| (top >= 0 && right < len && ft_isspace(map[top][right]))
-		|| (down < rows && left >= 0 && ft_isspace(map[down][left]))
-		|| (down < rows && right < len && ft_isspace(map[down][right])))
+	if ((top >= 0 && left >= 0 && ft_isspace(map[top][left])) || (top >= 0
+			&& right < len && ft_isspace(map[top][right])) || (down < rows
+			&& left >= 0 && ft_isspace(map[down][left])) || (down < rows
+			&& right < len && ft_isspace(map[down][right])))
 		return (1);
 	return (0);
 }
 
-// Check if any of the adjacent is not a valid wall character
+// Check if any of the adjacent is not a valid wall character (irregular wall)
 static int	is_surrounded_by_valid_walls(char **map, int x, int y, int rows)
 {
 	int	len;
@@ -109,18 +106,16 @@ static int	is_surrounded_by_valid_walls(char **map, int x, int y, int rows)
 	down = x + 1;
 	left = y - 1;
 	right = y + 1;
-	// Check if any of the adjacent cells (top, bottom, left, right)
-	if ((top < 0 || ft_strchr("10NSEW", map[top][y]))
-		|| (down >= rows || ft_strchr("10NSEW", map[down][y]))
-		|| (left < 0 || ft_strchr("10NSEW", map[x][left]))
-		|| (right >= len || ft_strchr("10NSEW", map[x][right])))
+	if ((top < 0 || ft_strchr("10NSEW", map[top][y])) || (down >= rows
+			|| ft_strchr("10NSEW", map[down][y])) || (left < 0
+			|| ft_strchr("10NSEW", map[x][left])) || (right >= len
+			|| ft_strchr("10NSEW", map[x][right])))
 		return (1);
-	// Check if any of the diagonal cells is not a valid wall character
 	if ((top >= 0 && left >= 0 && ft_strchr("10NSEW", map[top][left]))
 		|| (top >= 0 && right < len && ft_strchr("10NSEW", map[top][right]))
 		|| (down < rows && left >= 0 && ft_strchr("10NSEW", map[down][left]))
-		|| (down < rows && right < len
-			&& ft_strchr("10NSEW", map[down][right])))
+		|| (down < rows && right < len && ft_strchr("10NSEW",
+				map[down][right])))
 		return (1);
 	return (0);
 }

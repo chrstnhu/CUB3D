@@ -3,65 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:42:29 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/21 16:36:33 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 13:08:42 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	parse_texture(t_texinfo *texinfo, char *line);
-int	parse_color(t_texinfo *texinfo, int *color, char *line);
+int			parse_texture(t_texinfo *texinfo, char *line);
+int			parse_color(t_texinfo *texinfo, int *color, char *line);
 
+// Parse line
 int	parse_line(t_data *data, char *line)
 {
-	// Skip empty lines
 	if (line[0] == '\0' || line[0] == '\n')
 		return (0);
-	// Check if the line contains texture information
+	trim(&line);
 	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 		return (parse_texture(&data->texinfo, line));
-	// Check if the line contains color information
 	if (ft_strncmp(line, "F ", 2) == 0)
 		return (parse_color(&data->texinfo, data->texinfo.floor, line));
 	if (ft_strncmp(line, "C ", 2) == 0)
 		return (parse_color(&data->texinfo, data->texinfo.ceiling, line));
-	// If it's not a texture or color, it must be part of the map
-	// (Handling of map parsing will come later)
+	return (0);
+}
+
+static int	handle_texture(char **texture, char *line)
+{
+	if (*texture)
+		return (-1);
+	line += 2;
+	jump_space(&line);
+	*texture = ft_strdup(line);
 	return (0);
 }
 
 int	parse_texture(t_texinfo *texinfo, char *line)
 {
-	//printf(YELLOW"Enter texture:\n"DEF);
-	trim(&line);
 	if (!ft_strncmp(line, "NO ", 3))
-		texinfo->north = ft_strdup(line + 3);
+		return (handle_texture(&texinfo->north, line));
 	else if (!ft_strncmp(line, "SO ", 3))
-		texinfo->south = ft_strdup(line + 3);
+		return (handle_texture(&texinfo->south, line));
 	else if (!ft_strncmp(line, "WE ", 3))
-		texinfo->west = ft_strdup(line + 3);
+		return (handle_texture(&texinfo->west, line));
 	else if (!ft_strncmp(line, "EA ", 3))
-		texinfo->east = ft_strdup(line + 3);
+		return (handle_texture(&texinfo->east, line));
 	else
 		return (-1);
-	
-	//printf("North: (%s)\n", texinfo->north);
-	//printf("South: (%s)\n", texinfo->south);
-	//printf("West: (%s)\n", texinfo->west);
-	//printf("East: (%s)\n", texinfo->east);
-	
-	return (0);
 }
 
+// Parse color (floor, ceiling)
 int	parse_color(t_texinfo *texinfo, int *color, char *line)
 {
-	//printf(YELLOW"Enter parse color\n"DEF);
 	char	**rgb_parts;
 
+	if ((color == texinfo->floor && texinfo->hex_floor != 0)
+		|| (color == texinfo->ceiling && texinfo->hex_ceiling != 0))
+		return (-1);
 	if (!color)
 		return (-1);
 	rgb_parts = split_color(line + 2);
@@ -72,14 +73,8 @@ int	parse_color(t_texinfo *texinfo, int *color, char *line)
 	color[2] = ft_atoi(rgb_parts[2]);
 	free_tab((void **)rgb_parts);
 	if (color == texinfo->floor)
-	{
 		texinfo->hex_floor = (color[0] << 16) | (color[1] << 8) | color[2];
-		// printf("Floor Color (Decimal): %ld\n", texinfo->hex_floor);
-	}
 	else if (color == texinfo->ceiling)
-	{
 		texinfo->hex_ceiling = (color[0] << 16) | (color[1] << 8) | color[2];
-		// printf("Ceiling Color (Decimal): %ld\n\n\n", texinfo->hex_ceiling);
-	}
 	return (0);
 }

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:18:10 by chrhu             #+#    #+#             */
-/*   Updated: 2023/11/17 12:32:19 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 15:51:21 by leoniechen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
-{	
+{
 	unsigned int	i;
 
 	i = 0;

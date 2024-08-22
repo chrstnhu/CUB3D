@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:45:17 by chrhu             #+#    #+#             */
-/*   Updated: 2023/12/04 15:16:58 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 15:51:46 by leoniechen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include <stdarg.h>
 
 int	ft_printf_arg(char type, va_list args)
 {

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/21 19:03:49 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 15:47:56 by leoniechen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	check_map_char(t_data *data, char **map);
 static int	add_player_pos(t_data *data, char **map);
 
+// Check the map
 int	check_map(t_data *data)
 {
 	if (!data->map)
@@ -30,6 +31,7 @@ int	check_map(t_data *data)
 	return (0);
 }
 
+// Check the charactere in map
 static int	check_map_char(t_data *data, char **map)
 {
 	int	i;
@@ -59,6 +61,7 @@ static int	check_map_char(t_data *data, char **map)
 	return (0);
 }
 
+// Initiaze and add the position of player
 static int	add_player_pos(t_data *data, char **map)
 {
 	int	x;
@@ -75,9 +78,8 @@ static int	add_player_pos(t_data *data, char **map)
 		{
 			if (ft_strchr("NSEW", map[x][y]))
 			{
-				// Place the player at the center of the bloc;
-				data->player.pos_x = (double)x + 0.5;
-				data->player.pos_y = (double)y + 0.5;
+				data->player.pos_x = (double)y + 0.5;
+				data->player.pos_y = (double)x + 0.5;
 			}
 			y++;
 		}

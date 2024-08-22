@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_dir.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:58:36 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/21 15:40:52 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/08/22 12:19:30 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
+// Initialize player
 void	init_player_north_south(t_player *player)
 {
 	if (player->dir == 'N')
