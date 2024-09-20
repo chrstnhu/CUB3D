@@ -42,7 +42,7 @@ int	parse_map(t_data *data, char **map)
 	return (0);
 }
 
-// Get the map
+// Extract and get map
 static int	get_map(t_data *data, char **map, int x, int y)
 {
 	while (map[x] != NULL)
@@ -63,7 +63,7 @@ static int	get_map(t_data *data, char **map, int x, int y)
 	return (0);
 }
 
-// Create map
+// Create and fill the map
 static int	create_map(t_data *data, char **map, int x)
 {
 	data->wholemap.height = count_map_lines(data, map, x);

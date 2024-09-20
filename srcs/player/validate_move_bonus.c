@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_move.c                                    :+:      :+:    :+:   */
+/*   validate_move_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:08:14 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 14:49:52 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 14:49:08 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// Check if the move is in the map
-int	validate_move(t_data *data, double x, double y)
+// Check if the move is valid and avoid wall collision
+int	validate_move_bonus(t_data *data, double x, double y)
 {
 	int	moved;
+	int	map_x;
+	int	map_y;
 
 	moved = 0;
-	if ((x > 1 && x <= data->wholemap.width - 1)
-		&& (y > 1 && y <= data->wholemap.height - 1))
+	map_x = (int)x;
+	map_y = (int)y;
+	if (ft_strchr("0NSWE", data->map[map_y][map_x]))
 	{
 		data->player.pos_x = x;
-		moved = 1;
-	}
-	if ((x > 1 && x <= data->wholemap.width - 1)
-		&& (y > 1 && y <= data->wholemap.height - 1))
-	{
 		data->player.pos_y = y;
 		moved = 1;
+		data->collision = 0;
 	}
+	else
+		data->collision = 1;
 	return (moved);
 }
 
@@ -50,4 +51,26 @@ int	rotate_player(t_data *data, double rotate_dir)
 		* sin(rotate_speed);
 	p->plane_y = tmp_x * sin(rotate_speed) + p->plane_y * cos(rotate_speed);
 	return (1);
+}
+
+// Display collision warning message
+void	display_collision(t_data *data)
+{
+	void	*large_image;
+	char	*msg;
+	int		width;
+	int		height;
+
+	msg = "Warning, you hit a wall";
+	large_image = mlx_xpm_file_to_image(data->mlx,
+			"textures/warning.xpm", &width, &height);
+	if (large_image)
+	{
+		mlx_string_put(data->mlx, data->win, 10, 15, 0xFF0000, msg);
+		mlx_put_image_to_window(data->mlx, data->win,
+			large_image, 10, 20);
+		mlx_destroy_image(data->mlx, large_image);
+	}
+	else
+		mlx_string_put(data->mlx, data->win, 20, 20, 0xFF0000, msg);
 }

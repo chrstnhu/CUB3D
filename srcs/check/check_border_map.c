@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_border_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/22 12:10:33 by leochen          ###   ########.fr       */
+/*   Updated: 2024/09/20 10:59:00 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	check_walls(char **map, int x, int y, int rows);
 static int	is_adjacent_to_space(char **map, int x, int y, int rows);

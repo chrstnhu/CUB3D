@@ -1,13 +1,13 @@
-   WE                            textures/purplestone.xpm
-NO      textures/purplestone.xpm
+   WE                            textures/wolfenstein/grey_stone.xpm
+NO      textures/wolfenstein/purple_stone.xpm
 
 
 
-SO textures/purplestone.xpm
+SO textures/wolfenstein/red_brick.xpm
 
 F      17,    38,     64
 
-EA textures/purplestone.xpm
+EA textures/wolfenstein/wood.xpm
 
 
 

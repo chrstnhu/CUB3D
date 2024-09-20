@@ -6,11 +6,16 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/22 16:15:38 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 12:40:23 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
+
+int	check_cub_file(char *path);
+int	process_line(char *line, t_map_elements *elements);
+int	check_texture(char *line, t_map_elements *elements);
+int	check_texture_path(char **line, int *element_flag);
 
 // Check the file name and open
 int	file_valid(char *file)
@@ -32,24 +37,7 @@ int	file_valid(char *file)
 	return (0);
 }
 
-// Check in file
-int	process_line(char *line, t_map_elements *elements)
-{
-	if (line[0] == '\n')
-	{
-		free(line);
-		return (0);
-	}
-	if (check_texture(line, elements) == -1)
-	{
-		free(line);
-		get_next_line(-42);
-		return (error_exit("Invalid texture or color"));
-	}
-	free(line);
-	return (0);
-}
-
+// Check the entire cub file
 int	check_cub_file(char *path)
 {
 	int				fd;
@@ -76,17 +64,25 @@ int	check_cub_file(char *path)
 	return (0);
 }
 
-// Check texture
-int	check_texture_path(char **line, int *element_flag)
+// Check in file
+int	process_line(char *line, t_map_elements *elements)
 {
-	*element_flag = 1;
-	*line += 2;
-	jump_space(line);
-	if (path_valid(*line) == -1)
-		return (-1);
+	if (line[0] == '\n')
+	{
+		free(line);
+		return (0);
+	}
+	if (check_texture(line, elements) == -1)
+	{
+		free(line);
+		get_next_line(-42);
+		return (error_exit("Invalid texture or color"));
+	}
+	free(line);
 	return (0);
 }
 
+// Check texture and color
 int	check_texture(char *line, t_map_elements *elements)
 {
 	trim(&line);
@@ -102,5 +98,16 @@ int	check_texture(char *line, t_map_elements *elements)
 		return (check_color_element(&line, &elements->floor));
 	else if (!ft_strncmp(line, "C ", 2))
 		return (check_color_element(&line, &elements->ceiling));
+	return (0);
+}
+
+// Check if texture path is valid
+int	check_texture_path(char **line, int *element_flag)
+{
+	*element_flag = 1;
+	*line += 2;
+	jump_space(line);
+	if (path_valid(*line) == -1)
+		return (-1);
 	return (0);
 }

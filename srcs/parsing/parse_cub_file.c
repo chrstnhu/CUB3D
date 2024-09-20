@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/22 14:17:11 by leoniechen       ###   ########.fr       */
+/*   Updated: 2024/09/20 12:49:19 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+static int	parse_lines(t_data *data, int fd);
 static void	copy_cub_file(t_data *data);
 static int	init_wholemap_file(t_data *data);
-static int	parse_lines(t_data *data, int fd);
 
+// Open file
 static int	open_cub_file(t_data *data, char *path)
 {
 	data->wholemap.path = path;
@@ -42,7 +43,28 @@ int	parse_cub_file(t_data *data, char *path)
 	return (close(data->wholemap.fd), 0);
 }
 
-// Copy in another file
+// Parle line in file
+static int	parse_lines(t_data *data, int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (line[0] != '\n' && parse_line(data, line) == -1)
+		{
+			get_next_line(-42);
+			free(line);
+			clean_exit(data, RED"Error\nInvalid line"DEF, 1);
+		}
+		free(line);
+		data->wholemap.line_count++;
+		line = get_next_line(fd);
+	}
+	return (0);
+}
+
+// Copy cub file in a new file
 static void	copy_cub_file(t_data *data)
 {
 	int		i;
@@ -81,26 +103,6 @@ static int	init_wholemap_file(t_data *data)
 	{
 		error_msg(RED "Error\nInvalid calloc" DEF, 0);
 		return (-1);
-	}
-	return (0);
-}
-
-static int	parse_lines(t_data *data, int fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line[0] != '\n' && parse_line(data, line) == -1)
-		{
-			get_next_line(-42);
-			free(line);
-			clean_exit(data, RED"Error\nInvalid line"DEF, 1);
-		}
-		free(line);
-		data->wholemap.line_count++;
-		line = get_next_line(fd);
 	}
 	return (0);
 }

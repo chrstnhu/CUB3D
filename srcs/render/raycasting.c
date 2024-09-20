@@ -14,7 +14,8 @@
 
 void		calc_delta_dist(t_data *data, int x);
 void		calc_side_dist(t_data *data);
-void		dda(t_data *data, t_ray *ray);
+static void	calc_side_dist_x(t_ray *ray, double pos_x);
+static void	calc_side_dist_y(t_ray *ray, double pos_y);
 
 // Raycasting
 int	raycasting(t_data *data)
@@ -56,6 +57,18 @@ void	calc_delta_dist(t_data *data, int x)
 }
 
 // Calculate the side distance
+void	calc_side_dist(t_data *data)
+{
+	t_ray		*ray;
+	t_player	*player;
+
+	ray = &data->ray;
+	player = &data->player;
+	calc_side_dist_x(ray, player->pos_x);
+	calc_side_dist_y(ray, player->pos_y);
+}
+
+// Calculate the side distance x
 static void	calc_side_dist_x(t_ray *ray, double pos_x)
 {
 	if (ray->ray_dir_x < 0)
@@ -70,6 +83,7 @@ static void	calc_side_dist_x(t_ray *ray, double pos_x)
 	}
 }
 
+// Calculate the side distance y
 static void	calc_side_dist_y(t_ray *ray, double pos_y)
 {
 	if (ray->ray_dir_y < 0)
@@ -82,15 +96,4 @@ static void	calc_side_dist_y(t_ray *ray, double pos_y)
 		ray->step_y = 1;
 		ray->side_dist_y = (ray->map_grid_y + 1.0 - pos_y) * ray->delta_dist_y;
 	}
-}
-
-void	calc_side_dist(t_data *data)
-{
-	t_ray		*ray;
-	t_player	*player;
-
-	ray = &data->ray;
-	player = &data->player;
-	calc_side_dist_x(ray, player->pos_x);
-	calc_side_dist_y(ray, player->pos_y);
 }

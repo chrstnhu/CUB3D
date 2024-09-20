@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:02:32 by leochen           #+#    #+#             */
-/*   Updated: 2024/08/22 13:16:38 by leochen          ###   ########.fr       */
+/*   Updated: 2024/09/20 13:03:10 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void		update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x);
 static void	get_texture_index(t_data *data, t_ray *ray);
+void		dda(t_data *data, t_ray *ray);
 
 // Calcule the wall heigth
 void	calculate_line_height(t_data *data, t_ray *ray)

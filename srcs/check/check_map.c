@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/22 15:47:56 by leoniechen       ###   ########.fr       */
+/*   Updated: 2024/09/20 12:42:02 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_map_char(t_data *data, char **map);
 static int	add_player_pos(t_data *data, char **map);
 
-// Check the map
+// Check if map is valid
 int	check_map(t_data *data)
 {
 	if (!data->map)
@@ -31,7 +31,7 @@ int	check_map(t_data *data)
 	return (0);
 }
 
-// Check the charactere in map
+// Check characters in map
 static int	check_map_char(t_data *data, char **map)
 {
 	int	i;
@@ -61,7 +61,7 @@ static int	check_map_char(t_data *data, char **map)
 	return (0);
 }
 
-// Initiaze and add the position of player
+// Initialize and add the position of player
 static int	add_player_pos(t_data *data, char **map)
 {
 	int	x;

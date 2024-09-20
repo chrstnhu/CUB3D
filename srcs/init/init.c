@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoniechen <leoniechen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:18:43 by leochen           #+#    #+#             */
-/*   Updated: 2024/08/22 13:47:41 by leoniechen       ###   ########.fr       */
+/*   Updated: 2024/09/20 14:42:42 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void	init_data(t_data *data)
 {
 	data->mlx = NULL;
 	data->win = NULL;
-	data->win_height = 720;
-	data->win_width = 960;
+	data->win_height = WIN_HEIGHT;
+	data->win_width = WIN_WIDTH;
 	data->player_count = 0;
+	data->collision = 0;
 	data->map = NULL;
 	data->texture_pixels = NULL;
 	data->textures = NULL;
