@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 12:40:23 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:49:22 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_cub_file(char *path)
 	return (0);
 }
 
-// Check in file
+// Process current line
 int	process_line(char *line, t_map_elements *elements)
 {
 	if (line[0] == '\n')
@@ -82,7 +82,7 @@ int	process_line(char *line, t_map_elements *elements)
 	return (0);
 }
 
-// Check texture and color
+// Check texture and color are valid
 int	check_texture(char *line, t_map_elements *elements)
 {
 	trim(&line);

@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 12:07:45 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:57:21 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int ac, char **av)
 	return (0);
 }
 
+// Check if the map is at the end of the file
 static int	check_map_is_at_the_end(t_wholemap *map)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:11:43 by leochen           #+#    #+#             */
-/*   Updated: 2024/09/20 12:41:07 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:50:20 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	path_valid(char *path)
 	return (0);
 }
 
-// Check color if it enter color RGB norme
+// Check if the color RGB is valid
 int	check_color_element(char **line, int *element_flag)
 {
 	*element_flag = 1;

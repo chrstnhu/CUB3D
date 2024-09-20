@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 12:42:02 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:51:02 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	check_map_char(t_data *data, char **map)
 	return (0);
 }
 
-// Initialize and add the position of player
+// Initialize and set the player's position
 static int	add_player_pos(t_data *data, char **map)
 {
 	int	x;

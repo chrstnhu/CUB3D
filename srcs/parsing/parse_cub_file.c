@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 12:49:19 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:54:03 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	parse_lines(t_data *data, int fd);
 static void	copy_cub_file(t_data *data);
 static int	init_wholemap_file(t_data *data);
 
-// Open file
+// Open cub file
 static int	open_cub_file(t_data *data, char *path)
 {
 	data->wholemap.path = path;
@@ -26,7 +26,7 @@ static int	open_cub_file(t_data *data, char *path)
 	return (0);
 }
 
-// Parse cub file
+// Parse the content of cub file
 int	parse_cub_file(t_data *data, char *path)
 {
 	int	fd;
@@ -43,7 +43,7 @@ int	parse_cub_file(t_data *data, char *path)
 	return (close(data->wholemap.fd), 0);
 }
 
-// Parle line in file
+// Parse each line in the file
 static int	parse_lines(t_data *data, int fd)
 {
 	char	*line;
@@ -64,7 +64,7 @@ static int	parse_lines(t_data *data, int fd)
 	return (0);
 }
 
-// Copy cub file in a new file
+// Copy the content of cub file in a new file
 static void	copy_cub_file(t_data *data)
 {
 	int		i;
@@ -94,7 +94,7 @@ static void	copy_cub_file(t_data *data)
 	data->wholemap.file[row] = NULL;
 }
 
-// Initialize the map file
+// Initialize the whole map file
 static int	init_wholemap_file(t_data *data)
 {
 	data->wholemap.file = malloc((data->wholemap.line_count + 1)

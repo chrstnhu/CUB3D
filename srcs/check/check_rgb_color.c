@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:09:11 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 12:38:00 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:51:57 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	check_comma(char *line)
 	return (0);
 }
 
-// Check if the color is RGB
+// Check if is a valid RGB color
 int	check_color(char *line)
 {
 	char	**rgb_parts;

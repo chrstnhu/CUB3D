@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 10:59:00 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:47:14 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,14 @@ int	check_border_walls(t_data *data, char **map)
 	return (0);
 }
 
-// Check the irreguralite of wall
+// Check normal wall and irregular wall
 static int	check_walls(char **map, int x, int y, int total_rows)
 {
 	int	row_len;
 
 	row_len = ft_strlen(map[x]);
 	if (x < 0 || x >= total_rows || y < 0 || y >= row_len)
-	{
 		return (-1);
-	}
 	if (ft_strchr("0NSEW", map[x][y]))
 	{
 		if (is_adjacent_to_space(map, x, y, total_rows))
@@ -65,7 +63,7 @@ static int	check_walls(char **map, int x, int y, int total_rows)
 	return (0);
 }
 
-// Check if any of the adjacent is empty (irregular wall)
+// Check if the cell is adjacent to a empty space (irregular wall)
 static int	is_adjacent_to_space(char **map, int x, int y, int rows)
 {
 	int	len;
@@ -92,7 +90,7 @@ static int	is_adjacent_to_space(char **map, int x, int y, int rows)
 	return (0);
 }
 
-// Check if any of the adjacent is not a valid wall character (irregular wall)
+// Check if the cell is surrounded by a wall (irregular wall)
 static int	is_surrounded_by_valid_walls(char **map, int x, int y, int rows)
 {
 	int	len;

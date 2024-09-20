@@ -35,7 +35,7 @@ int	raycasting(t_data *data)
 	return (0);
 }
 
-// Calculate the delta distance
+// Calculate delta distances (distance between grid intersections) for a ray
 void	calc_delta_dist(t_data *data, int x)
 {
 	init_ray(&data->ray);
@@ -56,7 +56,7 @@ void	calc_delta_dist(t_data *data, int x)
 		data->ray.delta_dist_y = fabs(1 / data->ray.ray_dir_y);
 }
 
-// Calculate the side distance
+// Calculate the initial distance to the first intersection with a grid line
 void	calc_side_dist(t_data *data)
 {
 	t_ray		*ray;
@@ -68,7 +68,7 @@ void	calc_side_dist(t_data *data)
 	calc_side_dist_y(ray, player->pos_y);
 }
 
-// Calculate the side distance x
+// Calculate the side distance on x axis
 static void	calc_side_dist_x(t_ray *ray, double pos_x)
 {
 	if (ray->ray_dir_x < 0)
@@ -83,7 +83,7 @@ static void	calc_side_dist_x(t_ray *ray, double pos_x)
 	}
 }
 
-// Calculate the side distance y
+// Calculate the side distance on y axis
 static void	calc_side_dist_y(t_ray *ray, double pos_y)
 {
 	if (ray->ray_dir_y < 0)

@@ -31,7 +31,7 @@ void	free_tab(void **tab)
 	free(tab);
 }
 
-// Jump all the spac
+// Jump all the space
 void	jump_space(char **line)
 {
 	while (ft_isspace(**line))
@@ -40,7 +40,7 @@ void	jump_space(char **line)
 	}
 }
 
-// Trim space
+// Trim space at the start and at the end
 void	trim(char **str)
 {
 	char	*start;
@@ -85,7 +85,7 @@ char	*clean_spaces(const char *line)
 	return (new_line);
 }
 
-// Function definition
+// Initialize map elements
 void	init_map_element(t_map_elements *elements)
 {
 	elements->north = 0;

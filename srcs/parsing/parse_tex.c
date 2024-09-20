@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:42:29 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 12:56:00 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:55:14 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	parse_line(t_data *data, char *line)
 	return (0);
 }
 
-// Parse the texture
+// Parse texture
 int	parse_texture(t_texinfo *texinfo, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))

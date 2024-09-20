@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 14:42:24 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:31:22 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-enum				e_texture_index
+enum	e_texture_index
 {
 	NO = 0,
 	SO = 1,
 	EA = 2,
 	WE = 3,
+};
+
+enum	e_hit_side{
+	HIT_SIDE_X = 0,
+	HIT_SIDE_Y = 1
 };
 
 typedef struct s_img
