@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:07:15 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 14:43:19 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/21 13:08:38 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	player_move(t_data *data)
 		moved += move_player_right(data);
 	if (data->player.rotate != 0)
 		moved += rotate_player(data, data->player.rotate);
-	if (data->collision)
-		display_collision(data);
 	return (moved);
 }
 
@@ -51,7 +49,7 @@ static int	move_player_forward(t_data *data)
 	return (validate_move_bonus(data, x, y));
 }
 
-// Move backward ↓
+// Move backward ↓ 
 static int	move_player_backward(t_data *data)
 {
 	double	x;

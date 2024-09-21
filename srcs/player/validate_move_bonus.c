@@ -6,32 +6,62 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:08:14 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 14:49:08 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/21 13:24:59 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+static void	display_collision(t_data *data);
+int			rotate_player(t_data *data, double rotate_dir);
+
 // Check if the move is valid and avoid wall collision
-int	validate_move_bonus(t_data *data, double x, double y)
+int	validate_move_bonus(t_data *data, double new_x, double new_y)
 {
-	int	moved;
-	int	map_x;
-	int	map_y;
+	int		moved;
+	char	cell_x;
+	char	cell_y;
 
 	moved = 0;
-	map_x = (int)x;
-	map_y = (int)y;
-	if (ft_strchr("0NSWE", data->map[map_y][map_x]))
+	cell_x = data->map[(int)data->player.pos_y][(int)new_x];
+	if (ft_strchr("0NSWE", cell_x))
 	{
-		data->player.pos_x = x;
-		data->player.pos_y = y;
+		data->player.pos_x = new_x;
 		moved = 1;
-		data->collision = 0;
+	}
+	else if (cell_x == '1')
+		display_collision(data);
+	cell_y = data->map[(int)new_y][(int)data->player.pos_x];
+	if (ft_strchr("0NSWE", cell_y))
+	{
+		data->player.pos_y = new_y;
+		moved = 1;
+	}
+	else if (cell_y == '1')
+		display_collision(data);
+	return (moved);
+}
+
+// Display a message warning collision
+static void	display_collision(t_data *data)
+{
+	void	*large_image;
+	char	*msg;
+	int		width;
+	int		height;
+
+	msg = "Warning, you hit a wall";
+	large_image = mlx_xpm_file_to_image(data->mlx,
+			"textures/warning.xpm", &width, &height);
+	if (large_image)
+	{
+		mlx_string_put(data->mlx, data->win, 10, 15, 0xFF0000, msg);
+		mlx_put_image_to_window(data->mlx, data->win,
+			large_image, 10, 20);
+		mlx_destroy_image(data->mlx, large_image);
 	}
 	else
-		data->collision = 1;
-	return (moved);
+		mlx_string_put(data->mlx, data->win, 20, 20, 0xFF0000, msg);
 }
 
 // Rotate the point of view of the player
@@ -51,26 +81,4 @@ int	rotate_player(t_data *data, double rotate_dir)
 		* sin(rotate_speed);
 	p->plane_y = tmp_x * sin(rotate_speed) + p->plane_y * cos(rotate_speed);
 	return (1);
-}
-
-// Display collision warning message
-void	display_collision(t_data *data)
-{
-	void	*large_image;
-	char	*msg;
-	int		width;
-	int		height;
-
-	msg = "Warning, you hit a wall";
-	large_image = mlx_xpm_file_to_image(data->mlx,
-			"textures/warning.xpm", &width, &height);
-	if (large_image)
-	{
-		mlx_string_put(data->mlx, data->win, 10, 15, 0xFF0000, msg);
-		mlx_put_image_to_window(data->mlx, data->win,
-			large_image, 10, 20);
-		mlx_destroy_image(data->mlx, large_image);
-	}
-	else
-		mlx_string_put(data->mlx, data->win, 20, 20, 0xFF0000, msg);
 }
