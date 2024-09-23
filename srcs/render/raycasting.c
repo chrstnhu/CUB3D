@@ -28,7 +28,7 @@ int	raycasting(t_data *data)
 		calc_delta_dist(data, x);
 		calc_side_dist(data);
 		dda(data, &data->ray);
-		calculate_line_height(data, &data->ray, &data->player);
+		calculate_line_height(data, &data->ray);
 		update_texture_pix(data, &data->texinfo, &data->ray, x);
 		x++;
 	}

@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:02:32 by leochen           #+#    #+#             */
-/*   Updated: 2024/09/21 19:34:08 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/23 12:48:46 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 static void	update_wall_height(t_data *data, t_ray *ray);
 void		update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x);
-static void	set_texture_params(t_data *data, t_texinfo *tex, t_ray *ray);
 static void	get_texture_index(t_data *data, t_ray *ray);
+static void	set_texture_params(t_data *data, t_texinfo *tex, t_ray *ray);
 
 // Calculate the height of the wall to be drawn
-void	calculate_line_height(t_data *data, t_ray *ray, t_player *player)
+void	calculate_line_height(t_data *data, t_ray *ray)
 {
-	int	hit_side;
+	t_player	*player;
+	int			hit_side;
 
+	player = &data->player;
 	hit_side = ray->hit_side;
 	if (hit_side == HIT_SIDE_X)
 	{
@@ -45,7 +47,7 @@ void	calculate_line_height(t_data *data, t_ray *ray, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-// Update wall height
+// Update wall height (get start and end point of the wall)
 static void	update_wall_height(t_data *data, t_ray *ray)
 {
 	double	win_height;
@@ -80,31 +82,13 @@ void	update_texture_pix(t_data *data, t_texinfo *tex, t_ray *ray, int x)
 		tex->y = (int)tex->pos & (tex->size - 1);
 		tex->pos += tex->step;
 		color = data->textures[tex->index][tex->size * tex->y + tex->x];
-		if (tex->index == NO || tex->index == EA)
-			color = (color >> 1) & 8355711;
 		if (color > 0)
 			data->texture_pixels[y][x] = color;
 		y++;
 	}
 }
 
-// Configure texture parameters
-static void	set_texture_params(t_data *data, t_texinfo *tex, t_ray *ray)
-{
-	if (data->textures[tex->index] == NULL)
-		return ;
-	tex->x = (int)(ray->wall_x * tex->size);
-	if ((ray->hit_side == HIT_SIDE_X && ray->ray_dir_x < 0)
-		|| (ray->hit_side == HIT_SIDE_Y && ray->ray_dir_y > 0))
-	{
-		tex->x = tex->size - tex->x - 1;
-	}
-	tex->step = 1.0 * tex->size / ray->wall_line_height;
-	tex->pos = (ray->draw_start - data->win_height / 2
-			+ ray->wall_line_height / 2) * tex->step;
-}
-
-// Get the texture based on the direction of the wall hit
+// Get the texture based on direction of the wall hit
 static void	get_texture_index(t_data *data, t_ray *ray)
 {
 	if (ray->hit_side == HIT_SIDE_X)
@@ -121,4 +105,20 @@ static void	get_texture_index(t_data *data, t_ray *ray)
 		else
 			data->texinfo.index = SO;
 	}
+}
+
+// Set texture parameters (set step and position)
+static void	set_texture_params(t_data *data, t_texinfo *tex, t_ray *ray)
+{
+	if (data->textures[tex->index] == NULL)
+		return ;
+	tex->x = (int)(ray->wall_x * tex->size);
+	if ((ray->hit_side == HIT_SIDE_X && ray->ray_dir_x < 0)
+		|| (ray->hit_side == HIT_SIDE_Y && ray->ray_dir_y > 0))
+	{
+		tex->x = tex->size - tex->x - 1;
+	}
+	tex->step = 1.0 * tex->size / ray->wall_line_height;
+	tex->pos = (ray->draw_start - data->win_height / 2
+			+ ray->wall_line_height / 2) * tex->step;
 }
