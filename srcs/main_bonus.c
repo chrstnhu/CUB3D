@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:50 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/23 12:06:57 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:57:21 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 	mlx_hook(data.win, ClientMessage, NoEventMask, close_win, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, key_press, &data);
 	mlx_hook(data.win, KeyRelease, KeyReleaseMask, key_release, &data);
+	mlx_hook(data.win, MotionNotify, PointerMotionMask, mouse_motion, &data);
 	mlx_loop_hook(data.mlx, render, &data);
 	mlx_loop(data.mlx);
 	return (0);
@@ -74,6 +75,8 @@ void	init_mlx(t_data *data)
 	data->win = mlx_new_window(data->mlx, 960, 720, "Cub3D");
 	if (!data->win)
 		clean_exit(data, "mlx_new_window failed", 1);
+	mlx_mouse_move(data->mlx, data->win, data->win_width / 2,
+		data->win_height / 2);
 	return ;
 }
 

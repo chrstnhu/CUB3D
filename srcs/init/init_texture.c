@@ -80,6 +80,7 @@ static int	*xpm_to_img(t_data *data, char *path)
 	return (buffer);
 }
 
+// Initialize texture image
 static void	init_texture_img(t_data *data, t_img *image, char *path)
 {
 	static int	i = 0;

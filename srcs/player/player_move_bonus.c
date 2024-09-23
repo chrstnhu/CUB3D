@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_move.c                                      :+:      :+:    :+:   */
+/*   player_move_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:07:15 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 12:59:03 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/21 13:08:38 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static int	move_player_right(t_data *data);
 int	player_move(t_data *data)
 {
 	int	moved;
+	int	collision;
 
 	moved = 0;
+	collision = 0;
 	if (data->player.move_y == 1)
 		moved += move_player_forward(data);
 	if (data->player.move_y == -1)
@@ -44,10 +46,10 @@ static int	move_player_forward(t_data *data)
 
 	x = data->player.pos_x + data->player.dir_x * 0.0100;
 	y = data->player.pos_y + data->player.dir_y * 0.0100;
-	return (validate_move(data, x, y));
+	return (validate_move_bonus(data, x, y));
 }
 
-// Move backward ↓
+// Move backward ↓ 
 static int	move_player_backward(t_data *data)
 {
 	double	x;
@@ -55,7 +57,7 @@ static int	move_player_backward(t_data *data)
 
 	x = data->player.pos_x - data->player.dir_x * 0.0100;
 	y = data->player.pos_y - data->player.dir_y * 0.0100;
-	return (validate_move(data, x, y));
+	return (validate_move_bonus(data, x, y));
 }
 
 // Move left ←
@@ -66,7 +68,7 @@ static int	move_player_left(t_data *data)
 
 	x = data->player.pos_x + data->player.dir_y * 0.0100;
 	y = data->player.pos_y - data->player.dir_x * 0.0100;
-	return (validate_move(data, x, y));
+	return (validate_move_bonus(data, x, y));
 }
 
 // Move right →
@@ -77,5 +79,5 @@ static int	move_player_right(t_data *data)
 
 	x = data->player.pos_x - data->player.dir_y * 0.0100;
 	y = data->player.pos_y + data->player.dir_x * 0.0100;
-	return (validate_move(data, x, y));
+	return (validate_move_bonus(data, x, y));
 }

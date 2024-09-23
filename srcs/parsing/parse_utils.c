@@ -6,16 +6,16 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:37:43 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/22 11:38:03 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:55:53 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	get_longest_line(t_wholemap *map, int i);
 int			count_map_lines(t_data *data, char **map, int x);
 
-// Fill map
+// Fill map tab
 int	fill_map_tab(t_wholemap *wholemap, char **map_tab, int start)
 {
 	int	i;

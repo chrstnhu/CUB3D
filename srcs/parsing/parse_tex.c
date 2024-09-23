@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 10:42:29 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/22 13:08:42 by leochen          ###   ########.fr       */
+/*   Updated: 2024/09/20 16:55:14 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int			parse_texture(t_texinfo *texinfo, char *line);
+static int	handle_texture(char **texture, char *line);
 int			parse_color(t_texinfo *texinfo, int *color, char *line);
 
 // Parse line
@@ -31,16 +32,7 @@ int	parse_line(t_data *data, char *line)
 	return (0);
 }
 
-static int	handle_texture(char **texture, char *line)
-{
-	if (*texture)
-		return (-1);
-	line += 2;
-	jump_space(&line);
-	*texture = ft_strdup(line);
-	return (0);
-}
-
+// Parse texture
 int	parse_texture(t_texinfo *texinfo, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
@@ -53,6 +45,17 @@ int	parse_texture(t_texinfo *texinfo, char *line)
 		return (handle_texture(&texinfo->east, line));
 	else
 		return (-1);
+}
+
+// Handle the texture
+static int	handle_texture(char **texture, char *line)
+{
+	if (*texture)
+		return (-1);
+	line += 2;
+	jump_space(&line);
+	*texture = ft_strdup(line);
+	return (0);
 }
 
 // Parse color (floor, ceiling)

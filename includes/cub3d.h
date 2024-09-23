@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/08/22 16:50:34 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/23 12:40:55 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define BLUE "\033[0;34m"
 # define YELLOW "\033[0;33m"
 
+# define WIN_WIDTH 960
+# define WIN_HEIGHT 720
+
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
@@ -29,12 +32,17 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-enum				e_texture_index
+enum	e_texture_index
 {
 	NO = 0,
 	SO = 1,
 	EA = 2,
 	WE = 3,
+};
+
+enum	e_hit_side{
+	HIT_SIDE_X = 0,
+	HIT_SIDE_Y = 1
 };
 
 typedef struct s_img
@@ -92,6 +100,17 @@ typedef struct s_player
 
 }					t_player;
 
+typedef struct s_playermap
+{
+	char			**map;
+	t_img			*img;
+	int				size;
+	int				offset_x;
+	int				offset_y;
+	int				view_dist;
+	int				tile_size;
+}					t_minimap;
+
 typedef struct s_ray
 {
 	double			camera_plane_x;
@@ -120,6 +139,7 @@ typedef struct s_data
 	int				win_height;
 	int				win_width;
 	int				player_count;
+	int				collision;
 	t_wholemap		wholemap;
 	char			**map;
 	t_player		player;
@@ -223,4 +243,7 @@ int					player_move(t_data *data);
 int					validate_move(t_data *data, double x, double y);
 int					rotate_player(t_data *data, double rotate_dir);
 
+// BONUS
+int					validate_move_bonus(t_data *data, double x, double y);
+int					mouse_motion(int new_x, int y, t_data *data);
 #endif

@@ -17,6 +17,7 @@ void		init_img(t_data *data, t_img *image, int width, int height);
 static void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y);
 static void	set_image_pixel(t_img *image, int x, int y, int color);
 
+// Render screen visual
 void	render_screen(t_data *data)
 {
 	init_texture_pix(data);
@@ -52,6 +53,7 @@ void	render_frame(t_data *data)
 	mlx_destroy_image(data->mlx, image.mlx_img);
 }
 
+// Initialize image
 void	init_img(t_data *data, t_img *image, int width, int height)
 {
 	init_img_clean(image);
@@ -65,7 +67,7 @@ void	init_img(t_data *data, t_img *image, int width, int height)
 	return ;
 }
 
-// Set pixel
+// Set frame image pixel on the window
 static void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 {
 	int	color;
