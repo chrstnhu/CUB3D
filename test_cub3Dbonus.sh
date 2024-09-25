@@ -6,10 +6,6 @@ MAPS_DIR="maps/bad"
 # Path to your cub3D program (adjust according to your setup)
 CUB3D_EXEC="./cub3D_bonus"
 
-# Create or clear the test report file
-REPORT_FILE="valgrind_test_report.txt"
-echo "Valgrind Test Report for cub3D" > $REPORT_FILE
-
 # Valgrind options (adjust if needed)
 VALGRIND_OPTIONS="--leak-check=full --track-origins=yes --show-reachable=yes --error-exitcode=1"
 
@@ -26,36 +22,28 @@ NC='\033[0m' # No Color
 # Loop through each .cub file in the directory
 for map_file in $MAPS_DIR/*.cub; do
     echo -e "${YELLOW}Testing file: $map_file${NC}"
-    echo "Testing file: $map_file" >> $REPORT_FILE
 
     # Execute the program with Valgrind and capture the output
     output=$(valgrind $VALGRIND_OPTIONS $CUB3D_EXEC $map_file 2>&1)
 
-    # Display the complete Valgrind output in the terminal and add it to the report file
+    # Display the complete Valgrind output in the terminal
     echo "$output"
-    echo "$output" >> $REPORT_FILE
 
     # Check if the output contains "Error :" and if Valgrind reports no leaks
     if echo "$output" | grep -q "Error :" && echo "$output" | grep -q "All heap blocks were freed -- no leaks are possible"; then
         echo -e "${GREEN}PASSED${NC}"
-        echo "PASSED" >> $REPORT_FILE
         ((passed_count++))
     else
         echo -e "${RED}FAILED${NC}"
-        echo "FAILED" >> $REPORT_FILE
         ((failed_count++))
     fi
 
     # Add a separation between tests
-    echo "-------------------------" >> $REPORT_FILE
+    echo ""
+    echo "-------------------------------------------------------"
 done
 
 # Display the summary of results
-echo "Summary of tests:" >> $REPORT_FILE
-echo "Number of tests passed: $passed_count" >> $REPORT_FILE
-echo "Number of tests failed: $failed_count" >> $REPORT_FILE
-
-# Also display in the console with colors
 echo -e "\nAll Valgrind tests are completed."
 echo -e "${GREEN}Number of tests passed: $passed_count${NC}"
 echo -e "${RED}Number of tests failed: $failed_count${NC}"
