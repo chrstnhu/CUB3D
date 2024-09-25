@@ -79,8 +79,6 @@ char	*clean_spaces(const char *line)
 			new_line[j++] = line[i];
 		i++;
 	}
-	if (j > 0 && ft_isspace((new_line[j - 1])))
-		j--;
 	new_line[j] = '\0';
 	return (new_line);
 }
