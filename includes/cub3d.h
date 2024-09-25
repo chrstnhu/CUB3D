@@ -100,17 +100,6 @@ typedef struct s_player
 
 }					t_player;
 
-typedef struct s_playermap
-{
-	char			**map;
-	t_img			*img;
-	int				size;
-	int				offset_x;
-	int				offset_y;
-	int				view_dist;
-	int				tile_size;
-}					t_minimap;
-
 typedef struct s_ray
 {
 	double			camera_plane_x;
