@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:30:47 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/23 12:40:55 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/27 14:09:37 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 # define WIN_WIDTH 960
 # define WIN_HEIGHT 720
+
+# define SPEED 0.0100
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
