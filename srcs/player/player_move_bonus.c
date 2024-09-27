@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:07:15 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/21 13:08:38 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/27 13:22:43 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static int	move_player_forward(t_data *data)
 	double	x;
 	double	y;
 
-	x = data->player.pos_x + data->player.dir_x * 0.0100;
-	y = data->player.pos_y + data->player.dir_y * 0.0100;
+	x = data->player.pos_x + data->player.dir_x * SPEED;
+	y = data->player.pos_y + data->player.dir_y * SPEED;
 	return (validate_move_bonus(data, x, y));
 }
 
@@ -55,8 +55,8 @@ static int	move_player_backward(t_data *data)
 	double	x;
 	double	y;
 
-	x = data->player.pos_x - data->player.dir_x * 0.0100;
-	y = data->player.pos_y - data->player.dir_y * 0.0100;
+	x = data->player.pos_x - data->player.dir_x * SPEED;
+	y = data->player.pos_y - data->player.dir_y * SPEED;
 	return (validate_move_bonus(data, x, y));
 }
 
@@ -66,8 +66,8 @@ static int	move_player_left(t_data *data)
 	double	x;
 	double	y;
 
-	x = data->player.pos_x + data->player.dir_y * 0.0100;
-	y = data->player.pos_y - data->player.dir_x * 0.0100;
+	x = data->player.pos_x + data->player.dir_y * SPEED;
+	y = data->player.pos_y - data->player.dir_x * SPEED;
 	return (validate_move_bonus(data, x, y));
 }
 
@@ -77,7 +77,7 @@ static int	move_player_right(t_data *data)
 	double	x;
 	double	y;
 
-	x = data->player.pos_x - data->player.dir_y * 0.0100;
-	y = data->player.pos_y + data->player.dir_x * 0.0100;
+	x = data->player.pos_x - data->player.dir_y * SPEED;
+	y = data->player.pos_y + data->player.dir_x * SPEED;
 	return (validate_move_bonus(data, x, y));
 }

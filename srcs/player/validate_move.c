@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:08:14 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 14:49:52 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/27 14:11:11 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	rotate_player(t_data *data, double rotate_dir)
 	t_player	*p;
 	double		tmp_x;
 
-	rotate_speed = 0.015 * rotate_dir;
+	rotate_speed = SPEED * rotate_dir;
 	p = &data->player;
 	tmp_x = p->dir_x;
 	p->dir_x = p->dir_x * cos(rotate_speed) - p->dir_y * sin(rotate_speed);
