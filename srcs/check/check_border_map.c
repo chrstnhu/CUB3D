@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:31:26 by chrhu             #+#    #+#             */
-/*   Updated: 2024/09/20 16:47:14 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/27 13:27:45 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ static int	is_adjacent_to_space(char **map, int x, int y, int rows)
 	down = x + 1;
 	left = y - 1;
 	right = y + 1;
-	if ((top >= 0 && ft_isspace(map[top][y])) || (down < rows
-			&& ft_isspace(map[down][y])) || (left >= 0
-			&& ft_isspace(map[x][left])) || (right < len
-			&& ft_isspace(map[x][right])))
+	if ((top >= 0 && ft_isspace(map[top][y]))
+		|| (down < rows && ft_isspace(map[down][y]))
+		|| (left >= 0 && ft_isspace(map[x][left]))
+		|| (right < len && ft_isspace(map[x][right])))
 		return (1);
-	if ((top >= 0 && left >= 0 && ft_isspace(map[top][left])) || (top >= 0
-			&& right < len && ft_isspace(map[top][right])) || (down < rows
-			&& left >= 0 && ft_isspace(map[down][left])) || (down < rows
-			&& right < len && ft_isspace(map[down][right])))
+	if ((top >= 0 && left >= 0 && ft_isspace(map[top][left]))
+		|| (top >= 0 && right < len && ft_isspace(map[top][right]))
+		|| (down < rows && left >= 0 && ft_isspace(map[down][left]))
+		|| (down < rows && right < len && ft_isspace(map[down][right])))
 		return (1);
 	return (0);
 }
@@ -104,16 +104,16 @@ static int	is_surrounded_by_valid_walls(char **map, int x, int y, int rows)
 	down = x + 1;
 	left = y - 1;
 	right = y + 1;
-	if ((top < 0 || ft_strchr("10NSEW", map[top][y])) || (down >= rows
-			|| ft_strchr("10NSEW", map[down][y])) || (left < 0
-			|| ft_strchr("10NSEW", map[x][left])) || (right >= len
-			|| ft_strchr("10NSEW", map[x][right])))
+	if ((top < 0 || ft_strchr("10NSEW", map[top][y]))
+		|| (down >= rows || ft_strchr("10NSEW", map[down][y]))
+		|| (left < 0 || ft_strchr("10NSEW", map[x][left]))
+		|| (right >= len || ft_strchr("10NSEW", map[x][right])))
 		return (1);
 	if ((top >= 0 && left >= 0 && ft_strchr("10NSEW", map[top][left]))
 		|| (top >= 0 && right < len && ft_strchr("10NSEW", map[top][right]))
 		|| (down < rows && left >= 0 && ft_strchr("10NSEW", map[down][left]))
-		|| (down < rows && right < len && ft_strchr("10NSEW",
-				map[down][right])))
+		|| (down < rows && right < len
+			&& ft_strchr("10NSEW", map[down][right])))
 		return (1);
 	return (0);
 }
