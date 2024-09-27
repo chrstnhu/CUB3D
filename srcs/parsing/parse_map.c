@@ -77,7 +77,7 @@ static void	replace_space(t_data *data)
 		y = start;
 		while (y <= end)
 		{
-			if (data->map[x][y] == ' ')
+			if (ft_isspace(data->map[x][y]))
 				data->map[x][y] = '1';
 			y++;
 		}
