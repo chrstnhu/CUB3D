@@ -82,6 +82,7 @@ void	calc_side_dist(t_data *data)
 	calc_side_dist_y(ray, player->pos_y);
 }
 
+// Calculate the side dist (on axe y)
 static void	calc_side_dist_y(t_ray *ray, double pos_y)
 {
 	if (ray->ray_dir_y < 0)

@@ -6,7 +6,7 @@
 /*   By: chrhu <chrhu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 13:02:32 by leochen           #+#    #+#             */
-/*   Updated: 2024/09/23 12:48:46 by chrhu            ###   ########.fr       */
+/*   Updated: 2024/09/27 14:11:18 by chrhu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ void	calculate_line_height(t_data *data, t_ray *ray)
 	hit_side = ray->hit_side;
 	if (hit_side == HIT_SIDE_X)
 	{
-		ray->perp_wall_dist = (ray->map_grid_x - player->pos_x
-				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
+		ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;
 	}
 	else if (hit_side == HIT_SIDE_Y)
 	{
-		ray->perp_wall_dist = (ray->map_grid_y - player->pos_y
-				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+		ray->perp_wall_dist = ray->side_dist_y - ray->delta_dist_y;
 	}
 	update_wall_height(data, ray);
 	if (hit_side == HIT_SIDE_X)
