@@ -12,39 +12,17 @@
 
 #include "../../includes/cub3d.h"
 
-static int	get_map(t_data *data, char **map, int x, int y);
 static int	create_map(t_data *data, char **map, int x);
 static void	replace_space(t_data *data);
 
-// Parse the map
+// Extract and get map
 int	parse_map(t_data *data, char **map)
 {
 	int	x;
 	int	y;
-	int	ret;
 
-	ret = 0;
 	x = 0;
-	while (map[x])
-	{
-		y = 0;
-		while (map[x][y])
-		{
-			ret = get_map(data, map, x, y);
-			if (ret == -1)
-				return (-1);
-			else
-				return (0);
-			y++;
-		}
-		x++;
-	}
-	return (0);
-}
-
-// Extract and get map
-static int	get_map(t_data *data, char **map, int x, int y)
-{
+	y = 0;
 	while (map[x] != NULL)
 	{
 		while (map[x][y] == ' ' || map[x][y] == '\t' || map[x][y] == '\n')
