@@ -1,5 +1,5 @@
 # Path to libraries
-MLX_PATH = ./minilibx-linux/
+MLX_PATH = ./minilibx_linux/
 LIBFT_PATH = ./libft
 LIBS_PATH = -L$(LIBFT_PATH) -L$(MLX_PATH)
 SRCS_PATH = srcs
