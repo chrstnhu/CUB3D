@@ -1,5 +1,7 @@
 # cub3d 🕹️
 
+![Demo Camagru](assets/CUB3D-visual.gif)
+
 A **raycasting-based 3D engine** inspired by *Wolfenstein 3D*, developed in **C**
 
 ## 📋 Table of Contents  

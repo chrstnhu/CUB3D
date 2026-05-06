@@ -21,10 +21,8 @@ static int	move_player_right(t_data *data);
 int	player_move(t_data *data)
 {
 	int	moved;
-	int	collision;
 
 	moved = 0;
-	collision = 0;
 	if (data->player.move_y == 1)
 		moved += move_player_forward(data);
 	if (data->player.move_y == -1)
